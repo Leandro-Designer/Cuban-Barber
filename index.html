@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="Geo The Cuban Barber en Blue Island. Cortes clásicos, fade moderno, barba y estilo profesional. Reserva tu cita online.">
     <meta name="keywords" content="barbería, barber shop, cortes de cabello, fade, barba, Geo Cuban Barber, Blue Island barber">
+    <meta property="og:title" content="Geo The Cuban Barber — Corte & Estilo">
+<meta property="og:description" content="Cortes clásicos, modernos y barba profesional en Blue Island. Reserva tu cita ahora.">
+<meta property="og:image" content="https://https://leandro-designer.github.io/Cuban-Barber//imagenes/Geo%20Barbe%20Cuba.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://leandro-designer.github.io/Cuban-Barber/">
     <title>Geo-Cuban-Barber — Corte & Estilo</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -69,7 +74,7 @@
     <h2>Agenda tu cita 💈</h2>
 
     <label>Selecciona fecha</label>
-    <input type="Date" id="Date">
+    <input type="date" id="date">
 
     <label>Selecciona hora</label>
     <select id="time">
@@ -112,19 +117,19 @@
 
         <!-- SLOT 1 -->
         <div class="video-slot">
-            <iframe id="video-1" src="" allowfullscreen></iframe>
+            <iframe id="video-1" src="about:blank" allowfullscreen></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(1)">➕ Subir</button>
         </div>
 
         <!-- SLOT 2 -->
         <div class="video-slot">
-            <iframe id="video-2" src="" allowfullscreen></iframe>
+            <iframe id="video-2" src="about:blank" allowfullscreen></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(2)">➕ Subir</button>
         </div>
 
         <!-- SLOT 3 -->
         <div class="video-slot">
-            <iframe id="video-3" src="" allowfullscreen></iframe>
+            <iframe id="video-3" src="about:blank" allowfullscreen></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(3)">➕ Subir</button>
         </div>
 
@@ -296,57 +301,73 @@ let slotActivo = null;
 
 /* Cargar videos guardados */
 document.addEventListener("DOMContentLoaded", () => {
-    for (let i = 1; i <= 3; i++) {
-        const id = localStorage.getItem(`video_slot_${i}`);
-        if (id) {
-            document.getElementById(`video-${i}`).src =
-                `https://www.youtube.com/embed/${id}`;
+
+/* ===== CALENDARIO ===== */
+const horaApertura = 9;
+const horaCierre = 18;
+const intervalo = 60;
+
+const timeSelect = document.getElementById("time");
+const dateInput = document.getElementById("date");
+
+function generarHorarios() {
+    const horas = [];
+    for (let h = horaApertura; h < horaCierre; h++) {
+        for (let m = 0; m < 60; m += intervalo) {
+            horas.push(`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`);
         }
     }
-});
-
-/* Abrir panel para un slot específico */
-function abrirPanel(slot) {
-    slotActivo = slot;
-    document.getElementById("adminPanel").style.display = "block";
+    return horas;
 }
 
-/* Extraer ID de YouTube */
+if (dateInput) {
+    dateInput.addEventListener("change", () => {
+        timeSelect.innerHTML = '<option value="">-- Elegir hora --</option>';
+        const fecha = dateInput.value;
+        const citas = JSON.parse(localStorage.getItem("citas")) || [];
+        generarHorarios().forEach(hora => {
+            if (!citas.some(c => c.fecha === fecha && c.hora === hora)) {
+                const op = document.createElement("option");
+                op.value = hora;
+                op.textContent = hora;
+                timeSelect.appendChild(op);
+            }
+        });
+    });
+}
+
+/* ===== VIDEOS ===== */
+const PASSWORD_ADMIN = "Barber2026";
+let slotActivo = null;
+
+for (let i = 1; i <= 3; i++) {
+    const id = localStorage.getItem(`video_slot_${i}`);
+    if (id) {
+        document.getElementById(`video-${i}`).src =
+            `https://www.youtube.com/embed/${id}`;
+    }
+}
+
+window.abrirPanel = function (slot) {
+    slotActivo = slot;
+    document.getElementById("adminPanel").style.display = "block";
+};
+
 function obtenerIdYoutube(url) {
     try {
         const u = new URL(url);
-
-        // youtu.be/ID
-        if (u.hostname.includes("youtu.be")) {
-            return u.pathname.slice(1);
-        }
-
-        // youtube.com/watch?v=ID
-        if (u.searchParams.get("v")) {
-            return u.searchParams.get("v");
-        }
-
-        // youtube.com/embed/ID
-        if (u.pathname.includes("/embed/")) {
-            return u.pathname.split("/embed/")[1];
-        }
-
-        // youtube.com/shorts/ID  ✅ FIX
-        if (u.pathname.includes("/shorts/")) {
-            return u.pathname.split("/shorts/")[1];
-        }
-
+        if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+        if (u.searchParams.get("v")) return u.searchParams.get("v");
+        if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1];
+        if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1];
         return null;
-    } catch {
-        return null;
-    }
+    } catch { return null; }
 }
 
-/* Guardar video en el slot */
-function guardarVideo() {
-    const pass = document.getElementById("password").value;
-    const url  = document.getElementById("youtubeUrl").value;
-    const msg  = document.getElementById("adminMsg");
+window.guardarVideo = function () {
+    const pass = password.value;
+    const url = youtubeUrl.value;
+    const msg = adminMsg;
 
     if (pass !== PASSWORD_ADMIN) {
         msg.textContent = "❌ Contraseña incorrecta";
@@ -355,9 +376,8 @@ function guardarVideo() {
     }
 
     const id = obtenerIdYoutube(url);
-    if (!id || slotActivo === null) {
-        msg.textContent = "❌ Video inválido";
-        msg.style.color = "red";
+    if (!id) {
+        msg.textContent = "❌ Link inválido";
         return;
     }
 
@@ -365,45 +385,36 @@ function guardarVideo() {
     document.getElementById(`video-${slotActivo}`).src =
         `https://www.youtube.com/embed/${id}`;
 
-    msg.textContent = "✅ Video actualizado";
-msg.style.color = "green";
+    msg.textContent = "✅ Video guardado";
+    msg.style.color = "green";
 
-document.getElementById("youtubeUrl").value = "";
-document.getElementById("password").value = "";
+    password.value = "";
+    youtubeUrl.value = "";
 
-setTimeout(() => {
-    document.getElementById("adminPanel").style.display = "none";
-    msg.textContent = "";
-}, 1200);
-}
+    setTimeout(() => {
+        adminPanel.style.display = "none";
+        msg.textContent = "";
+    }, 1200);
+};
 
-/*=======Codigo de feedback realizado======*/
-document.addEventListener("DOMContentLoaded", () => {
+/* ===== FEEDBACK ===== */
+const feedbackForm = document.getElementById("feedbackForm");
+const reviewsList = document.getElementById("reviewsList");
 
-    const feedbackForm = document.getElementById("feedbackForm");
-    const reviewsList = document.getElementById("reviewsList");
-
-    if (!feedbackForm || !reviewsList) return;
-
-    /* Cargar opiniones guardadas */
+if (feedbackForm && reviewsList) {
     const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
     reviews.forEach(r => renderReview(r));
 
-    /* Enviar feedback */
-    feedbackForm.addEventListener("submit", function (e) {
+    feedbackForm.addEventListener("submit", e => {
         e.preventDefault();
-
-        const name = document.getElementById("fb-name").value.trim();
-        const message = document.getElementById("fb-message").value.trim();
+        const name = fb-name.value.trim();
+        const message = fb-message.value.trim();
         const rating = document.querySelector('input[name="rating"]:checked')?.value;
-
         if (!name || !message || !rating) return;
 
         const review = { name, message, rating };
-
         reviews.unshift(review);
         localStorage.setItem("reviews", JSON.stringify(reviews));
-
         renderReview(review);
         feedbackForm.reset();
     });
@@ -411,15 +422,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderReview(r) {
         const div = document.createElement("div");
         div.className = "review-card";
-
         div.innerHTML = `
             <strong>${r.name}</strong>
             <div class="stars">${"★".repeat(r.rating)}</div>
             <p>${r.message}</p>
         `;
-
         reviewsList.prepend(div);
     }
+}
 
 });
 </script>
