@@ -113,34 +113,34 @@
         </section>
 
         
-        <!---- VIDEOS ---->
+        <!-- ===== SECCIÓN VIDEOS ===== -->
 <section id="Videos">
-    <h2 class="title" style="color:var(--accent);margin:16px 0">Videos</h2>
+    <h2 class="title" style="color:var(--accent); margin:16px 0">Videos</h2>
 
     <div class="gallery">
 
         <!-- SLOT 1 -->
         <div class="video-slot">
-            <iframe id="video-1" src="about:blank" allowfullscreen></iframe>
+            <iframe id="video-1" src="" allowfullscreen loading="lazy"></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(1)">➕ Subir</button>
         </div>
 
         <!-- SLOT 2 -->
         <div class="video-slot">
-            <iframe id="video-2" src="about:blank" allowfullscreen></iframe>
+            <iframe id="video-2" src="" allowfullscreen loading="lazy"></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(2)">➕ Subir</button>
         </div>
 
         <!-- SLOT 3 -->
         <div class="video-slot">
-            <iframe id="video-3" src="about:blank" allowfullscreen></iframe>
+            <iframe id="video-3" src="" allowfullscreen loading="lazy"></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(3)">➕ Subir</button>
         </div>
 
     </div>
 
     <!-- PANEL ADMIN -->
-    <div id="adminPanel" class="admin-panel" style="display:none">
+    <div id="adminPanel" class="admin-panel">
         <input type="password" id="password" placeholder="Contraseña admin">
         <input type="text" id="youtubeUrl" placeholder="Link de YouTube">
         <button type="button" onclick="guardarVideo()">Guardar video</button>
@@ -314,135 +314,120 @@ let slotActivo = null;
 /* Cargar videos guardados */
 document.addEventListener("DOMContentLoaded", () => {
 
-/* ===== CALENDARIO ===== */
-const horaApertura = 9;
-const horaCierre = 18;
-const intervalo = 60;
+    const PASSWORD_ADMIN = "Barber2026"; // 🔒 Cambia tu contraseña
+    let slotActivo = null;
 
-const timeSelect = document.getElementById("time");
-const dateInput = document.getElementById("date");
+    // ===== Función para abrir el panel admin =====
+    window.abrirPanel = function(slot) {
+        slotActivo = slot;
+        document.getElementById("adminPanel").style.display = "block";
+    };
 
-function generarHorarios() {
-    const horas = [];
-    for (let h = horaApertura; h < horaCierre; h++) {
-        for (let m = 0; m < 60; m += intervalo) {
-            horas.push(`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`);
+    // ===== Función para obtener ID de YouTube limpio =====
+    function obtenerIdYoutube(url) {
+        try {
+            const u = new URL(url);
+            // youtu.be
+            if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+            // url con ?v=
+            if (u.searchParams.get("v")) return u.searchParams.get("v");
+            // embed
+            if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1];
+            // shorts
+            if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1].split("?")[0];
+            return null;
+        } catch { return null; }
+    }
+
+    // ===== Cargar videos guardados desde localStorage =====
+    for (let i = 1; i <= 3; i++) {
+        const id = localStorage.getItem(`video_slot_${i}`);
+        if (id) {
+            document.getElementById(`video-${i}`).src =
+                `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
         }
     }
-    return horas;
-}
 
-if (dateInput) {
-    dateInput.addEventListener("change", () => {
-        timeSelect.innerHTML = '<option value="">-- Elegir hora --</option>';
-        const fecha = dateInput.value;
-        const citas = JSON.parse(localStorage.getItem("citas")) || [];
-        generarHorarios().forEach(hora => {
-            if (!citas.some(c => c.fecha === fecha && c.hora === hora)) {
-                const op = document.createElement("option");
-                op.value = hora;
-                op.textContent = hora;
-                timeSelect.appendChild(op);
-            }
-        });
-    });
-}
+    // ===== Función para guardar video =====
+    window.guardarVideo = function() {
+        const pass = document.getElementById("password").value;
+        const url = document.getElementById("youtubeUrl").value;
+        const msg = document.getElementById("adminMsg");
 
-/* ===== VIDEOS ===== */
-const PASSWORD_ADMIN = "Barber2026";
-let slotActivo = null;
+        if (pass !== PASSWORD_ADMIN) {
+            msg.textContent = "❌ Contraseña incorrecta";
+            msg.style.color = "red";
+            return;
+        }
 
-for (let i = 1; i <= 3; i++) {
-    const id = localStorage.getItem(`video_slot_${i}`);
-    if (id) {
-        document.getElementById(`video-${i}`).src =
-            `https://www.youtube.com/embed/${id}`;
-    }
-}
+        const id = obtenerIdYoutube(url);
+        if (!id) {
+            msg.textContent = "❌ Link inválido";
+            msg.style.color = "red";
+            return;
+        }
 
-window.abrirPanel = function (slot) {
-    slotActivo = slot;
-    document.getElementById("adminPanel").style.display = "block";
-};
+        // Guardar en localStorage
+        localStorage.setItem(`video_slot_${slotActivo}`, id);
 
-function obtenerIdYoutube(url) {
-    try {
-        const u = new URL(url);
-        if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
-        if (u.searchParams.get("v")) return u.searchParams.get("v");
-        if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1];
-        if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1];
-        return null;
-    } catch { return null; }
-}
+        // Actualizar iframe
+        document.getElementById(`video-${slotActivo}`).src =
+            `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
 
-window.guardarVideo = function () {
-    const pass = password.value;
-    const url = youtubeUrl.value;
-    const msg = adminMsg;
+        msg.textContent = "✅ Video guardado";
+        msg.style.color = "green";
 
-    if (pass !== PASSWORD_ADMIN) {
-        msg.textContent = "❌ Contraseña incorrecta";
-        msg.style.color = "red";
-        return;
-    }
+        // Limpiar inputs y cerrar panel
+        document.getElementById("password").value = "";
+        document.getElementById("youtubeUrl").value = "";
 
-    const id = obtenerIdYoutube(url);
-    if (!id) {
-        msg.textContent = "❌ Link inválido";
-        return;
-    }
-
-    localStorage.setItem(`video_slot_${slotActivo}`, id);
-    document.getElementById(`video-${slotActivo}`).src =
-        `https://www.youtube.com/embed/${id}`;
-
-    msg.textContent = "✅ Video guardado";
-    msg.style.color = "green";
-
-    password.value = "";
-    youtubeUrl.value = "";
-
-    setTimeout(() => {
-        adminPanel.style.display = "none";
-        msg.textContent = "";
-    }, 1200);
-};
+        setTimeout(() => {
+            document.getElementById("adminPanel").style.display = "none";
+            msg.textContent = "";
+        }, 1200);
+    };
+});
 
 /* ===== FEEDBACK ===== */
-const feedbackForm = document.getElementById("feedbackForm");
-const reviewsList = document.getElementById("reviewsList");
+document.addEventListener("DOMContentLoaded", () => {
+    const feedbackForm = document.getElementById("feedbackForm");
+    const reviewsList = document.getElementById("reviewsList");
 
-if (feedbackForm && reviewsList) {
-    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-    reviews.forEach(r => renderReview(r));
+    if (feedbackForm && reviewsList) {
+        // Cargar reviews guardadas
+        const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+        reviews.forEach(r => renderReview(r));
 
-    feedbackForm.addEventListener("submit", e => {
-        e.preventDefault();
-        const name = fb-name.value.trim();
-        const message = fb-message.value.trim();
-        const rating = document.querySelector('input[name="rating"]:checked')?.value;
-        if (!name || !message || !rating) return;
+        // Enviar review
+        feedbackForm.addEventListener("submit", e => {
+            e.preventDefault();
 
-        const review = { name, message, rating };
-        reviews.unshift(review);
-        localStorage.setItem("reviews", JSON.stringify(reviews));
-        renderReview(review);
-        feedbackForm.reset();
-    });
+            const name = document.getElementById("fb-name").value.trim();
+            const message = document.getElementById("fb-message").value.trim();
+            const rating = document.querySelector('input[name="rating"]:checked')?.value;
 
-    function renderReview(r) {
-        const div = document.createElement("div");
-        div.className = "review-card";
-        div.innerHTML = `
-            <strong>${r.name}</strong>
-            <div class="stars">${"★".repeat(r.rating)}</div>
-            <p>${r.message}</p>
-        `;
-        reviewsList.prepend(div);
+            if (!name || !message || !rating) return;
+
+            const review = { name, message, rating };
+            reviews.unshift(review);
+            localStorage.setItem("reviews", JSON.stringify(reviews));
+
+            renderReview(review);
+            feedbackForm.reset();
+        });
+
+        // Función para mostrar review
+        function renderReview(r) {
+            const div = document.createElement("div");
+            div.className = "review-card";
+            div.innerHTML = `
+                <strong>${r.name}</strong>
+                <div class="stars">${"★".repeat(r.rating)}</div>
+                <p>${r.message}</p>
+            `;
+            reviewsList.prepend(div);
+        }
     }
-}
-
 });
 </script>
     </div>
