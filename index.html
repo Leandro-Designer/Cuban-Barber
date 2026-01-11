@@ -307,12 +307,11 @@ function reservar() {
     cargarHoras();
 }
 
-/*=========BOTÓN DE SUBIR VIDEOS=========*/
-/*========= BOTÓN DE SUBIR VIDEOS - JS OPTIMIZADO =========*/
+/*========= CARGA DE VIDEOS EN IFRAAMES =========*/
 const PASSWORD_ADMIN = "Barber2026";
 let slotActivo = null;
 
-// Función para abrir el panel admin
+// Función para abrir panel admin
 function abrirPanel(slot) {
     slotActivo = slot;
     document.getElementById("adminPanel").style.display = "block";
@@ -330,33 +329,17 @@ function obtenerIdYoutube(url) {
     } catch { return null; }
 }
 
-// Cargar videos guardados y preparar lazy load
+// Cargar videos guardados al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
-    const iframes = document.querySelectorAll("#Videos iframe");
-
-    iframes.forEach((iframe, i) => {
-        const slot = i + 1;
-        const id = localStorage.getItem(`video_slot_${slot}`);
+    for (let i = 1; i <= 3; i++) {
+        const iframe = document.getElementById(`video-${i}`);
+        const id = localStorage.getItem(`video_slot_${i}`);
         if (id) {
-            // Asignar src inmediatamente para que se vea en móviles
             iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
         } else {
-            // Preparar lazy load para iframes vacíos
-            iframe.dataset.src = iframe.dataset.src || "";
+            iframe.src = "https://www.youtube.com/embed/?rel=0&showinfo=0"; // placeholder
         }
-    });
-
-    // Lazy load avanzado: carga src solo al hacer scroll (IntersectionObserver)
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            const iframe = entry.target;
-            if (entry.isIntersecting && iframe.dataset.src && !iframe.src) {
-                iframe.src = iframe.dataset.src;
-            }
-        });
-    }, { threshold: 0.25 });
-
-    iframes.forEach(iframe => observer.observe(iframe));
+    }
 });
 
 // Función para guardar video desde panel admin
@@ -381,8 +364,7 @@ function guardarVideo() {
     localStorage.setItem(`video_slot_${slotActivo}`, id);
 
     const iframe = document.getElementById(`video-${slotActivo}`);
-    iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`; // ✅ carga inmediata
-    iframe.dataset.src = iframe.src;
+    iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
 
     msg.textContent = "✅ Video guardado";
     msg.style.color = "green";
@@ -395,7 +377,6 @@ function guardarVideo() {
         msg.textContent = "";
     }, 1200);
 }
-
 /* ===== FEEDBACK ===== */
 document.addEventListener("DOMContentLoaded", () => {
     const feedbackForm = document.getElementById("feedbackForm");
@@ -441,5 +422,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </body>
 </html>
+
 
 
