@@ -113,39 +113,40 @@
         </section>
 
         
-        <!-- SECCIÓN VIDEOS -->
-        <section id="Videos">
-            <h2 class="title" style="color:var(--accent); margin:16px 0">Videos</h2>
-            <div class="gallery">
+        <!-- ===== SECCIÓN VIDEOS ===== -->
+<section id="Videos">
+    <h2 class="title" style="color:var(--accent); margin:16px 0">Videos</h2>
 
-                <!-- SLOT 1 -->
-                <div class="video-slot">
-                    <iframe id="video-1" data-slot="1" src="" allowfullscreen></iframe>
-                    <button type="button" class="admin-btn mini" onclick="abrirPanel(1)">➕ Subir</button>
-                </div>
+    <div class="gallery">
 
-                <!-- SLOT 2 -->
-                <div class="video-slot">
-                    <iframe id="video-2" data-slot="2" src="" allowfullscreen></iframe>
-                    <button type="button" class="admin-btn mini" onclick="abrirPanel(2)">➕ Subir</button>
-                </div>
+        <!-- SLOT 1 -->
+        <div class="video-slot">
+            <iframe id="video-1" src="" allowfullscreen loading="lazy"></iframe>
+            <button type="button" class="admin-btn mini" onclick="abrirPanel(1)">➕ Subir</button>
+        </div>
 
-                <!-- SLOT 3 -->
-                <div class="video-slot">
-                    <iframe id="video-3" data-slot="3" src="" allowfullscreen></iframe>
-                    <button type="button" class="admin-btn mini" onclick="abrirPanel(3)">➕ Subir</button>
-                </div>
+        <!-- SLOT 2 -->
+        <div class="video-slot">
+            <iframe id="video-2" src="" allowfullscreen loading="lazy"></iframe>
+            <button type="button" class="admin-btn mini" onclick="abrirPanel(2)">➕ Subir</button>
+        </div>
 
-            </div>
+        <!-- SLOT 3 -->
+        <div class="video-slot">
+            <iframe id="video-3" src="" allowfullscreen loading="lazy"></iframe>
+            <button type="button" class="admin-btn mini" onclick="abrirPanel(3)">➕ Subir</button>
+        </div>
 
-            <!-- PANEL ADMIN -->
-            <div id="adminPanel" class="admin-panel">
-                <input type="password" id="password" placeholder="Contraseña admin">
-                <input type="text" id="youtubeUrl" placeholder="Link de YouTube">
-                <button type="button" onclick="guardarVideo()">Guardar video</button>
-                <p id="adminMsg"></p>
-            </div>
-        </section>
+    </div>
+
+    <!-- PANEL ADMIN -->
+    <div id="adminPanel" class="admin-panel">
+        <input type="password" id="password" placeholder="Contraseña admin">
+        <input type="text" id="youtubeUrl" placeholder="Link de YouTube">
+        <button type="button" onclick="guardarVideo()">Guardar video</button>
+        <p id="adminMsg"></p>
+    </div>
+</section>
 
         <section class="seo-text" style="display:none">
     <h2>Barbería en Blue Island</h2>
@@ -308,35 +309,45 @@ function reservar() {
 }
 
 /*=========BOTÓN DE SUBIR VIDEOS=========*/
-const PASSWORD_ADMIN = "Barber2026"; // 🔴 CAMBIA ESTO
+/*========= BOTÓN DE SUBIR VIDEOS - JS OPTIMIZADO =========*/
+const PASSWORD_ADMIN = "Barber2026";
 let slotActivo = null;
 
-/* Cargar videos guardados */
+// Función para abrir el panel admin
+function abrirPanel(slot) {
+    slotActivo = slot;
+    document.getElementById("adminPanel").style.display = "block";
+}
+
+// Función para obtener ID de YouTube desde cualquier link
+function obtenerIdYoutube(url) {
+    try {
+        const u = new URL(url);
+        if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+        if (u.searchParams.get("v")) return u.searchParams.get("v");
+        if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1];
+        if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1].split("?")[0];
+        return null;
+    } catch { return null; }
+}
+
+// Cargar videos guardados y preparar lazy load
 document.addEventListener("DOMContentLoaded", () => {
-    const PASSWORD_ADMIN = "Barber2026";
-    let slotActivo = null;
+    const iframes = document.querySelectorAll("#Videos iframe");
 
-    function obtenerIdYoutube(url) {
-        try {
-            const u = new URL(url);
-            if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
-            if (u.searchParams.get("v")) return u.searchParams.get("v");
-            if (u.pathname.includes("/embed/")) return u.pathname.split("/embed/")[1];
-            if (u.pathname.includes("/shorts/")) return u.pathname.split("/shorts/")[1].split("?")[0];
-            return null;
-        } catch { return null; }
-    }
-
-    // Cargar videos guardados
-    document.querySelectorAll("#Videos iframe").forEach(iframe => {
-        const slot = iframe.dataset.slot;
+    iframes.forEach((iframe, i) => {
+        const slot = i + 1;
         const id = localStorage.getItem(`video_slot_${slot}`);
         if (id) {
-            iframe.dataset.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
+            // Asignar src inmediatamente para que se vea en móviles
+            iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
+        } else {
+            // Preparar lazy load para iframes vacíos
+            iframe.dataset.src = iframe.dataset.src || "";
         }
     });
 
-    // Lazy load avanzado
+    // Lazy load avanzado: carga src solo al hacer scroll (IntersectionObserver)
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             const iframe = entry.target;
@@ -345,51 +356,47 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, { threshold: 0.25 });
-    document.querySelectorAll("#Videos iframe").forEach(iframe => observer.observe(iframe));
 
-    // Abrir panel admin
-    window.abrirPanel = function(slot) {
-        slotActivo = slot;
-        document.getElementById("adminPanel").style.display = "block";
-    };
-
-    // Guardar video
-    window.guardarVideo = function() {
-        const pass = document.getElementById("password").value;
-        const url = document.getElementById("youtubeUrl").value;
-        const msg = document.getElementById("adminMsg");
-
-        if (pass !== PASSWORD_ADMIN) {
-            msg.textContent = "❌ Contraseña incorrecta";
-            msg.style.color = "red";
-            return;
-        }
-
-        const id = obtenerIdYoutube(url);
-        if (!id) {
-            msg.textContent = "❌ Link inválido";
-            msg.style.color = "red";
-            return;
-        }
-
-        localStorage.setItem(`video_slot_${slotActivo}`, id);
-
-        const iframe = document.querySelector(`#video-${slotActivo}`);
-        iframe.dataset.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
-        iframe.src = iframe.dataset.src; // carga inmediata
-
-        msg.textContent = "✅ Video guardado";
-        msg.style.color = "green";
-
-        document.getElementById("password").value = "";
-        document.getElementById("youtubeUrl").value = "";
-
-        setTimeout(() => {
-            document.getElementById("adminPanel").style.display = "none";
-            msg.textContent = "";
-        }, 1200);
-    };
+    iframes.forEach(iframe => observer.observe(iframe));
 });
+
+// Función para guardar video desde panel admin
+function guardarVideo() {
+    const pass = document.getElementById("password").value;
+    const url = document.getElementById("youtubeUrl").value;
+    const msg = document.getElementById("adminMsg");
+
+    if (pass !== PASSWORD_ADMIN) {
+        msg.textContent = "❌ Contraseña incorrecta";
+        msg.style.color = "red";
+        return;
+    }
+
+    const id = obtenerIdYoutube(url);
+    if (!id) {
+        msg.textContent = "❌ Link inválido";
+        msg.style.color = "red";
+        return;
+    }
+
+    localStorage.setItem(`video_slot_${slotActivo}`, id);
+
+    const iframe = document.getElementById(`video-${slotActivo}`);
+    iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`; // ✅ carga inmediata
+    iframe.dataset.src = iframe.src;
+
+    msg.textContent = "✅ Video guardado";
+    msg.style.color = "green";
+
+    document.getElementById("password").value = "";
+    document.getElementById("youtubeUrl").value = "";
+
+    setTimeout(() => {
+        document.getElementById("adminPanel").style.display = "none";
+        msg.textContent = "";
+    }, 1200);
+}
+
 /* ===== FEEDBACK ===== */
 document.addEventListener("DOMContentLoaded", () => {
     const feedbackForm = document.getElementById("feedbackForm");
@@ -435,6 +442,4 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </body>
 </html>
-
-
 

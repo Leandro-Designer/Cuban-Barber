@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://https://leandro-designer.github.io/Cuban-Barber/sitemap.xml
