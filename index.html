@@ -121,19 +121,19 @@
 
         <!-- SLOT 1 -->
         <div class="video-slot">
-            <iframe id="video-1" src="" allowfullscreen></iframe>
+            <iframe id="video-1" src="" allowfullscreen loading="lazy"></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(1)">➕ Subir</button>
         </div>
 
         <!-- SLOT 2 -->
         <div class="video-slot">
-            <iframe id="video-2" src="" allowfullscreen></iframe>
+            <iframe id="video-2" src="" allowfullscreen loading="lazy"></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(2)">➕ Subir</button>
         </div>
 
         <!-- SLOT 3 -->
         <div class="video-slot">
-            <iframe id="video-3" src="" allowfullscreen></iframe>
+            <iframe id="video-3" src="" allowfullscreen loading="lazy"></iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(3)">➕ Subir</button>
         </div>
 
@@ -147,6 +147,7 @@
         <p id="adminMsg"></p>
     </div>
 </section>
+
         <section class="seo-text" style="display:none">
     <h2>Barbería en Blue Island</h2>
     <p>
@@ -307,11 +308,12 @@ function reservar() {
     cargarHoras();
 }
 
-/*========= CARGA DE VIDEOS EN IFRAAMES =========*/
+/*=========BOTÓN DE SUBIR VIDEOS=========*/
+/*========= BOTÓN DE SUBIR VIDEOS - JS OPTIMIZADO =========*/
 const PASSWORD_ADMIN = "Barber2026";
 let slotActivo = null;
 
-// Función para abrir panel admin
+// Función para abrir el panel admin
 function abrirPanel(slot) {
     slotActivo = slot;
     document.getElementById("adminPanel").style.display = "block";
@@ -329,17 +331,33 @@ function obtenerIdYoutube(url) {
     } catch { return null; }
 }
 
-// Cargar videos guardados al cargar la página
+// Cargar videos guardados y preparar lazy load
 document.addEventListener("DOMContentLoaded", () => {
-    for (let i = 1; i <= 3; i++) {
-        const iframe = document.getElementById(`video-${i}`);
-        const id = localStorage.getItem(`video_slot_${i}`);
+    const iframes = document.querySelectorAll("#Videos iframe");
+
+    iframes.forEach((iframe, i) => {
+        const slot = i + 1;
+        const id = localStorage.getItem(`video_slot_${slot}`);
         if (id) {
+            // Asignar src inmediatamente para que se vea en móviles
             iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
         } else {
-            iframe.src = "https://www.youtube.com/embed/?rel=0&showinfo=0"; // placeholder
+            // Preparar lazy load para iframes vacíos
+            iframe.dataset.src = iframe.dataset.src || "";
         }
-    }
+    });
+
+    // Lazy load avanzado: carga src solo al hacer scroll (IntersectionObserver)
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const iframe = entry.target;
+            if (entry.isIntersecting && iframe.dataset.src && !iframe.src) {
+                iframe.src = iframe.dataset.src;
+            }
+        });
+    }, { threshold: 0.25 });
+
+    iframes.forEach(iframe => observer.observe(iframe));
 });
 
 // Función para guardar video desde panel admin
@@ -364,7 +382,8 @@ function guardarVideo() {
     localStorage.setItem(`video_slot_${slotActivo}`, id);
 
     const iframe = document.getElementById(`video-${slotActivo}`);
-    iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
+    iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`; // ✅ carga inmediata
+    iframe.dataset.src = iframe.src;
 
     msg.textContent = "✅ Video guardado";
     msg.style.color = "green";
@@ -377,6 +396,7 @@ function guardarVideo() {
         msg.textContent = "";
     }, 1200);
 }
+
 /* ===== FEEDBACK ===== */
 document.addEventListener("DOMContentLoaded", () => {
     const feedbackForm = document.getElementById("feedbackForm");
@@ -422,6 +442,4 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </body>
 </html>
-
-
 

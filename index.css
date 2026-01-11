@@ -1,71 +1,70 @@
-/* =================== RESET BÁSICO =================== */
+/* RESET BÁSICO */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body {
-    font-family: Rubik, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color: #ffffff;
-    background: linear-gradient(180deg, #efb810 0%, #0a0a0ac5 60%);
-    padding: 24px;
-    height: 100%;
+    height:100%;
+    font-family:Rubik,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#ffffff
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    color:inherit;
+    text-decoration:none
 }
 
-/* =================== VARIABLES =================== */
-:root {
-    --bg: #0f1724; /* azul oscuro */
-    --card: #0b1220;
-    --accent: #d4af37; /* dorado */
-    --muted: #9aa4b2;
-    --glass: rgba(255,255,255,0.04);
+/* PALETA */n
+:root{
+    --bg:#0f1724; /* azul oscuro */
+    --card:#0b1220;
+    --accent:#d4af37; /* dorado */
+    --muted:#9aa4b2;
+    --glass:rgba(255,255,255,0.04);
 }
 
-/* =================== CONTENEDOR =================== */
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 12px;
-    background: transparent;
+body {
+    background:linear-gradient(180deg, #efb810 0%, #0a0a0ac5 60%);
+    padding:24px;
 }
 
-/* =================== HEADER =================== */
+/* CONTENEDOR */
+.container{max-width:1100px;margin:0 auto;
+    background:transparent;
+}
+
+/* HEADER */
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
+    display:flex;align-items:center;
+    justify-content:space-between;
+    padding:20px 0;
 }
 
 .brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    display:flex;
+    align-items:center;
+    gap:14px;
 }
 
 .logo {
-    width: 56px;
-    height: 56px;
-    background: var(--glass);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: var(--accent);
-    font-family: "Playfair Display";
+    width:56px;height:56px;
+    background:var(--glass);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:var(--accent);
+    font-family:Playfair Display;
 }
 
 .logo-1 {
-    width: 56px;
-    height: 56px;
+    width:56px;height:56px;
     border-radius: 12px;
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo-presentacion {
@@ -73,77 +72,74 @@ header {
 }
 
 nav a {
-    margin-left: 18px;
-    color: var(--muted);
-    font-weight: 500;
+    margin-left:18px;color:var(--muted);
+    font-weight:500;
 }
 
 .cta {
-    background: var(--accent);
-    color: #071022;
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-weight: 700;
+    background:var(--accent);
+    color:#071022;
+    padding:10px 16px;
+    border-radius:10px;
+    font-weight:700;
 }
 
-/* =================== HERO =================== */
+/* HERO */
 .hero {
-    display: grid;
-    grid-template-columns: 1fr auto; /* ajustable para móviles */
-    gap: 28px;
-    align-items: center;
-    margin-top: 18px;
+    display:grid;
+    grid-template-columns:1fr 420px;
+    gap:28px;
+    align-items:center;
+    margin-top:18px;
     background-color: #3a4044bb;
     border-radius: 5px;
 }
 
 .hero-card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding: 32px;
-    border-radius: 18px;
-    backdrop-filter: blur(4px);
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:32px;
+    border-radius:18px;
+    backdrop-filter:blur(4px);
 }
 
 .eyebrow {
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 1px;
+    color:var(--accent);
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 h1 {
-    font-size: 36px;
-    margin-top: 12px;
-    line-height: 1.2;
-    color: #fff;
-    font-family: "Playfair Display";
+    font-size:36px;
+    margin-top:12px;
+    line-height:1.02;
+    color:#fff;
+    font-family:Playfair Display;
 }
 
-p.lead {
-    margin-top: 12px;
-    color: var(--muted);
+p .lead {
+    margin-top:12px;
+    color:var(--muted);
 }
 
 .hero-actions {
-    display: flex;
+    display:flex;
     width: 180px;
-    margin-top: 18px;
-    background-color: var(--accent);
+    margin-top:18px;
+    background-color: #d4af37;
     border-radius: 10px;
 }
 
 .btn {
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: 700;
+    padding:12px 18px;
+    border-radius:12px;
+    font-weight:700;
 }
 
-.btn-ghost {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.06);
-    color: var(--muted);
+.btn-ghost{background: transparent;
+    border:1px solid rgba(255,255,255,0.06);color:var(--muted);
 }
 
-/* =================== WIDGET CALENDARIO =================== */
+/* ===== WIDGET CALENDARIO ===== */
 .calendar-widget {
     width: 100%;
     max-width: 360px;
@@ -155,6 +151,7 @@ p.lead {
     color: #fff;
 }
 
+/* ===== TITULO ===== */
 .calendar-widget h2 {
     text-align: center;
     font-size: 1.4rem;
@@ -163,6 +160,7 @@ p.lead {
     margin-bottom: 18px;
 }
 
+/* ===== LABELS ===== */
 .calendar-widget label {
     display: block;
     font-size: 0.85rem;
@@ -170,6 +168,7 @@ p.lead {
     margin: 14px 0 6px;
 }
 
+/* ===== INPUTS ===== */
 .calendar-widget input,
 .calendar-widget select {
     width: 100%;
@@ -188,6 +187,7 @@ p.lead {
     box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
 }
 
+/* ===== BOTÓN DE CALENDARIO ===== */
 .reservar-btn {
     display: inline-block;
     width: 100%;
@@ -197,51 +197,70 @@ p.lead {
     color: #000;
     font-weight: 600;
     border-radius: 12px;
-    margin-top: 20px;
     text-decoration: none;
+    margin-top: 20px;
+}
+/* ===== MENSAJE ===== */
+.calendar-widget #mensaje {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 0.9rem;
 }
 
+    /* TARJETA RESERVAS */
 .booking {
-    background: var(--card);
-    padding: 18px;
-    border-radius: 14px;
-    color: #fff;
+    background:var(--card);
+    padding:18px;
+    border-radius:14px;
+    color:#fff
 }
 
 .booking h3 {
-    font-size: 18px;
-    margin-bottom: 8px;
+    font-size:18px;
+    margin-bottom:8px
 }
 
 .booking .info {
-    color: var(--muted);
-    font-size: 14px;
-    margin-bottom: 12px;
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:12px
 }
 
-/* =================== SECCIONES =================== */
+.booking .book-btn {
+    display:block;
+    text-align:center;
+    margin-top:8px;
+    padding:10px;
+    border-radius:10px;
+    background:var(--accent);color:#fff;
+    font-weight:700
+}
+
+/* SECCIONES */
 section {
-    margin-top: 26px;
+    margin-top:26px
 }
 
-/* =================== SERVICIOS =================== */
+/* ===== CONTENEDOR SERVICIOS ===== */
 #servicios {
     max-width: 1100px;
     margin: 60px auto;
     padding: 40px 30px;
     background: linear-gradient(180deg, #d4af3734, #d4af377c);
     border-radius: 20px;
-    border: 2px solid var(--accent);
+    border: 2px solid #d4af37; /* dorado */
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
+/* ===== TITULO ===== */
 #servicios h2 {
     text-align: center;
     font-size: 2rem;
-    color: #ffffff;
+    color: #ffffff; /* blanco*/
     letter-spacing: 1px;
 }
 
+/* ===== GRID ===== */
 #servicios .grid-3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -249,6 +268,7 @@ section {
     margin-top: 30px;
 }
 
+/* ===== TARJETA SERVICIO ===== */
 #servicios .service {
     background: var(--accent);
     border-radius: 16px;
@@ -257,38 +277,49 @@ section {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* hover */
 #servicios .service:hover {
     transform: translateY(-6px);
     box-shadow: 0 8px 20px #fff;
 }
 
+/* ===== TITULO SERVICIO ===== */
 #servicios .service h4 {
     font-size: 1.2rem;
     margin-bottom: 10px;
     color: #000;
 }
 
+/* ===== TEXTO ===== */
 #servicios .service p {
     font-size: 14px;
     color: #555;
     line-height: 1.6;
 }
 
-/* =================== VIDEOS =================== */
+/* ===== RESPONSIVE DE TARJETA DE SERVICIO ===== */
+@media (max-width: 768px) {
+    #servicios {
+        padding: 30px 20px;
+    }
+}
+
+/* ================== VIDEOS ================== */
 #Videos {
     margin-top: 80px;
 }
 
+/* Título */
 #Videos .title {
     text-align: center;
     font-size: 2rem;
     letter-spacing: 1px;
 }
 
-/* GALERÍA RESPONSIVE */
+/* GALERÍA DE VIDEOS */
 #Videos .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 22px;
     margin-top: 30px;
 }
@@ -310,11 +341,12 @@ section {
 
 .video-slot iframe {
     width: 100%;
-    aspect-ratio: 16/9;
+    aspect-ratio: 16 / 9;
     border: none;
     background: url('imagenes/video-placeholder.jpg') center/cover no-repeat;
 }
 
+/* BOTÓN ADMIN */
 .video-slot .admin-btn {
     position: absolute;
     bottom: 12px;
@@ -336,6 +368,7 @@ section {
     box-shadow: 0 10px 28px rgba(212,175,55,0.55);
 }
 
+/* PANEL ADMIN */
 .admin-panel {
     display: none;
     margin-top: 20px;
@@ -346,7 +379,223 @@ section {
     color: #fff;
 }
 
-/* =================== RESPONSIVE =================== */
+/* ================== PANEL ADMIN (OCULTO) ================== */
+.admin-panel {
+    display: none;
+}
+
+/* ================== RESPONSIVE de los videos ================== */
+
+@media (max-width: 980px) {
+    #Videos .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    #Videos .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .video-slot iframe {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/*================ FEEDBACK =================*/
+
+.title {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.btn {
+    background: linear-gradient(135deg, #d4af37, #b8962e);
+    color: #1a1a1a;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212,175,55,0.35);
+}
+
+.feedback-form {
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 28px;
+    background: linear-gradient(180deg, #f4f4f431, #eaeaea);
+    border-radius: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.164);
+    box-shadow: 0 5px 20px rgba(252, 251, 251, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.feedback-form h2 {
+    text-align: center;
+    color: #b8962e;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+/* ===== INPUTS ===== */
+.feedback-form input,
+.feedback-form textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #cfcfcf;
+    background: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+    border-color: #d4af37;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(212,175,55,0.25);
+}
+
+/* ===== ESTRELLAS ===== */
+.stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.stars input {
+    display: none;
+}
+
+.stars label {
+    font-size: 30px;
+    color: #fffdfd;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.stars label:hover {
+    transform: scale(1.15);
+}
+
+.stars input:checked ~ label,
+.stars label:hover,
+.stars label:hover ~ label {
+    color: #d4af37;
+}
+
+/* ================= FOOTER CONTENEDOR ================= */
+footer {
+    background: linear-gradient(180deg, #5555, #555);
+    border-top: 3px solid #d4af37;
+    padding: 40px 20px 30px;
+    margin-top: 60px;
+    border-radius: 20px;
+}
+
+/* Contenedor general */
+footer .container {
+    max-width: 1100px;
+    margin: 0 auto 30px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d4af37;
+    border-radius: 10px;
+}
+
+/* Texto footer */
+footer p {
+    color: #fff;
+    font-size: 14px;
+    margin: 6px 0;
+}
+
+footer p a {
+    color: #d4af37;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+footer p a:hover {
+    text-decoration: underline;
+}
+
+/* ================= SECCIÓN CONTACTO ================= */
+#contacto {
+    max-width: 1100px;
+    margin: 0 auto 40px;
+    padding: 30px;
+    background: #555;
+    border-radius: 20px;
+    border: 1px solid #d4af37;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+#contacto .title {
+    text-align: center;
+    color: #d4af37;
+}
+
+#contacto p,
+#contacto li {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ================= REDES SOCIALES ================= */
+footer .social-box {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 25px;
+    background: #555;
+    border-radius: 18px;
+    border: 1px solid #d4af37;
+    box-shadow: 0 10px 10px #fff;
+    text-align: center;
+}
+
+footer .social-box h4 {
+    margin-bottom: 15px;
+    color: #d4af37;
+    letter-spacing: 1px;
+}
+
+footer .social-box a {
+    display: inline-block;
+    margin: 0 8px;
+    transition: transform 0.25s ease;
+}
+
+footer .social-box a:hover {
+    transform: translateY(-4px);
+}
+
+footer .social-box img {
+    width: 34px;
+    height: 34px;
+}
+
+footer .social-box img.booksy {
+    width: 42px;
+}
+
+.booksy {
+    border-radius: 50%;
+}
+
+/* ================= RESPONSIVE ================= */
 
 /* Tablet / Laptop pequeño */
 @media (max-width: 980px) {
@@ -354,8 +603,16 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .grid-3 {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .testimonials {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -369,10 +626,66 @@ section {
 
 /* Móvil */
 @media (max-width: 560px) {
-    body { padding: 16px; }
+    body {
+        padding: 16px;
+    }
 
-    .gallery { grid-template-columns: 1fr; }
-    nav a { display: none; }
-    .logo { width: 48px; height: 48px; }
-    h1 { font-size: 28px; }
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav a {
+        display: none;
+    }
+
+    .logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
 }
+
+/*=========Codigo responsive de feedback realizados=====*/
+.reviews {
+    margin-top: 40px;
+}
+
+.reviews h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.review-card {
+    background: #1b1b1b;
+    border: 1px solid #2a2a2a;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+
+.review-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.review-stars {
+    color: #d4af37;
+    margin-bottom: 8px;
+}
+
+.review-text {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+    
