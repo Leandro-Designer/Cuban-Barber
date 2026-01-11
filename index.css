@@ -688,4 +688,17 @@ footer .social-box img.booksy {
     color: var(--muted);
 }
 
-    
+/* ================= FIX VIDEOS MOBILE ================= */
+@media (max-width: 560px) {
+.video-slot {
+    overflow: hidden;
+}
+
+.video-slot iframe {
+    width: 100%;
+    height: auto;
+    min-height: 220px;
+    display: block;
+    background: #000;
+    }
+}

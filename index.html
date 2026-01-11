@@ -121,19 +121,40 @@
 
         <!-- SLOT 1 -->
         <div class="video-slot">
-            <iframe id="video-1" src="" allowfullscreen loading="lazy"></iframe>
+            <iframe
+            id="video-1"
+            src="https://www.youtube.com/embed/uc74opVB7ZY"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(1)">➕ Subir</button>
         </div>
 
         <!-- SLOT 2 -->
         <div class="video-slot">
-            <iframe id="video-2" src="" allowfullscreen loading="lazy"></iframe>
+            <iframe
+            id="video-2"
+            src="https://www.youtube.com/embed/Ib2IEvymir4"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(2)">➕ Subir</button>
         </div>
 
         <!-- SLOT 3 -->
         <div class="video-slot">
-            <iframe id="video-3" src="" allowfullscreen loading="lazy"></iframe>
+            <iframe
+            id="video-3"
+            src="https://www.youtube.com/embed/OK0iH631dmY"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
             <button type="button" class="admin-btn mini" onclick="abrirPanel(3)">➕ Subir</button>
         </div>
 
@@ -339,25 +360,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const slot = i + 1;
         const id = localStorage.getItem(`video_slot_${slot}`);
         if (id) {
-            // Asignar src inmediatamente para que se vea en móviles
             iframe.src = `https://www.youtube.com/embed/${id}?rel=0&showinfo=0`;
-        } else {
-            // Preparar lazy load para iframes vacíos
-            iframe.dataset.src = iframe.dataset.src || "";
         }
     });
-
-    // Lazy load avanzado: carga src solo al hacer scroll (IntersectionObserver)
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            const iframe = entry.target;
-            if (entry.isIntersecting && iframe.dataset.src && !iframe.src) {
-                iframe.src = iframe.dataset.src;
-            }
-        });
-    }, { threshold: 0.25 });
-
-    iframes.forEach(iframe => observer.observe(iframe));
 });
 
 // Función para guardar video desde panel admin
@@ -423,7 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             renderReview(review);
             feedbackForm.reset();
-        });
+});
 
         // Función para mostrar review
         function renderReview(r) {
@@ -442,4 +447,3 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </body>
 </html>
-
