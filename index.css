@@ -21,7 +21,7 @@ a {
     --bg:#0f1724; /* azul oscuro */
     --card:#0b1220;
     --accent:#d4af37; /* dorado */
-    --muted:#9aa4b2;
+    --muted:#fff;
     --glass:rgba(255,255,255,0.04);
 }
 
@@ -74,7 +74,7 @@ header {
 }
 
 nav a {
-    margin-left:18px;color:var(--muted);
+    margin-left:18px;color:var(--#fff);
     font-weight:500;
 }
 
@@ -120,7 +120,7 @@ h1 {
 
 .lead {
     margin-top:12px;
-    color:var(--muted);
+    color:var(--#fff);
 }
 
 .hero-actions {
@@ -138,7 +138,7 @@ h1 {
 }
 
 .btn-ghost{background: transparent;
-    border:1px solid rgba(255,255,255,0.06);color:var(--muted);
+    border:1px solid rgba(255,255,255,0.06);color:var(--#fff);
 }
 
 /* ===== WIDGET CALENDARIO ===== */
@@ -705,6 +705,7 @@ footer .social-box img.booksy {
     }
 
 }
+
 
 
 
