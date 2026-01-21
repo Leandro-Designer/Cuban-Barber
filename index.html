@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="Geo The Cuban Barber en Blue Island. Cortes clásicos, fade moderno, barba y estilo profesional. Reserva tu cita online.">
-    <meta name="keywords" content="barbería, barber shop, cortes de cabello, fade, barba, Geo Cuban Barber, Blue Island barber">
     <meta property="og:title" content="Geo The Cuban Barber — Corte & Estilo">
     <meta name="robots" content="index, follow">
     <meta property="og:locale" content="es_US">
@@ -30,6 +29,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="imagenes/Geo-The-Cuban-Barber.png" sizes="32x32" type="image/png">
     <link rel="stylesheet" href="index.css">
+
+    <!-------SCRIPT DE schema.org------->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  "name": "Geo The Cuban Barber",
+  "image": "https://leandro-designer.github.io/Cuban-Barber/imagenes/The-Cuban-Barber.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "13325 Old Western Ave",
+    "addressLocality": "Blue Island",
+    "addressRegion": "IL",
+    "postalCode": "60406",
+    "addressCountry": "US"
+  },
+  "telephone": "+1-727-777-3925",
+  "url": "https://leandro-designer.github.io/Cuban-Barber/",
+  "openingHours": [
+    "Mo-We 09:00-18:00",
+    "Th-Sa 09:00-20:00"
+  ],
+  "sameAs": [
+    "https://www.instagram.com/geothecubanbarber",
+    "https://www.tiktok.com/@geo.barber.cuba",
+    "https://booksy.com/en-us/1348020_geo-the-cuban-barber_barber-shop_18223_blue-island"
+  ]
+}
+</script>
 </head>
 <body>
     <div class="container">
@@ -106,18 +134,18 @@
 
         <!----SERVICIOS---->
         <section id="servicios">
-        <h2 style="color:var(--accent);margin-bottom:12px">Servicios</h2>
+        <h2 style="color:var(--accent);margin-bottom:12px">Servicios de barbería en Blue Island</h2>
         <div class="grid-3">
             <div class="service">
-            <h4>Corte clásico</h4>
+            <h3>Corte clásico</h3>
             <p style="color:var(--muted);font-size:14px">Técnicas tradicionales con máquina y tijera para un acabado limpio y duradero.</p>
             </div>
             <div class="service">
-            <h4>Fade moderno</h4>
+            <h3>Fade moderno</h3>
             <p style="color:var(--muted);font-size:14px">Degradados precisos y estilizados para un look contemporáneo.</p>
             </div>
             <div class="service">
-            <h4>Afeitado a navaja</h4>
+            <h3>Afeitado a navaja</h3>
             <p style="color:var(--muted);font-size:14px">Afeitado caliente con toallas y productos de primera.</p>
             </div>
         </div>
@@ -126,7 +154,7 @@
         
         <!-- ===== SECCIÓN VIDEOS ===== -->
 <section id="Videos">
-    <h2 class="title" style="color:var(--accent); margin:16px 0">Videos</h2>
+    <h2 class="title" style="color:var(--accent); margin:16px 0">Videos de Trabajos realizados</h2>
 
     <div class="gallery">
 
@@ -187,7 +215,7 @@
         <h2 class="title" >Feedback</h2>
 
         <div class="reviews">
-    <h3>Opiniones de clientes</h3>
+    <h2>Opiniones de clientes</h2>
     <div id="reviewsList" class="reviews-grid"></div>
         </div>
 
@@ -410,3 +438,4 @@ onValue(videosRef, (snapshot) => {
 </body>
 
 </html>
+
