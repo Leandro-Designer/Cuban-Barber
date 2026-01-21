@@ -15,7 +15,8 @@ a {
     text-decoration:none
 }
 
-/* PALETA */n
+/* PALETA */
+
 :root{
     --bg:#0f1724; /* azul oscuro */
     --card:#0b1220;
@@ -23,6 +24,7 @@ a {
     --muted:#9aa4b2;
     --glass:rgba(255,255,255,0.04);
 }
+
 
 body {
     background:linear-gradient(180deg, #efb810 0%, #0a0a0ac5 60%);
@@ -116,7 +118,7 @@ h1 {
     font-family:Playfair Display;
 }
 
-p .lead {
+.lead {
     margin-top:12px;
     color:var(--muted);
 }
@@ -703,5 +705,6 @@ footer .social-box img.booksy {
     }
 
 }
+
 
 
