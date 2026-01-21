@@ -404,7 +404,7 @@ section {
 
 /*================ FEEDBACK =================*/
 
-.title {
+.title .review {
     text-align: center;
     margin-top: 100px;
 }
@@ -701,4 +701,5 @@ footer .social-box img.booksy {
     display: block;
     background: #000;
     }
+
 }
