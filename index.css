@@ -251,7 +251,7 @@ section {
     background: linear-gradient(180deg, #d4af3734, #d4af377c);
     border-radius: 20px;
     border: 2px solid #d4af37; /* dorado */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 
 /* ===== TITULO ===== */
@@ -332,7 +332,7 @@ section {
     border-radius: 16px;
     overflow: hidden;
     border: 1px solid rgba(212,175,55,0.25);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.6);
     transition: transform .3s ease, box-shadow .3s ease;
 }
 
@@ -541,7 +541,7 @@ footer p a:hover {
     background: #555;
     border-radius: 20px;
     border: 1px solid #d4af37;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 #contacto .title {
@@ -705,6 +705,7 @@ footer .social-box img.booksy {
     }
 
 }
+
 
 
 
