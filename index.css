@@ -332,6 +332,72 @@ section {
 }
 
 /* GALERÍA DE VIDEOS */
+/* ADMIN PANEL */
+.admin-main {
+    display: grid;
+    gap: 24px;
+    padding: 32px 0 52px;
+}
+
+.admin-hero {
+    max-width: 760px;
+    padding: 28px;
+    background: #101010;
+    border: 1px solid rgba(212,175,55,0.28);
+    border-radius: 8px;
+    box-shadow: 0 18px 42px rgba(0,0,0,0.38);
+}
+
+.admin-hero h1 {
+    margin: 6px 0 10px;
+    color: #fff;
+    font-size: 34px;
+    line-height: 1.12;
+}
+
+.admin-section {
+    display: grid;
+    grid-template-columns: minmax(280px, 420px) 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.admin-section .video-admin {
+    margin: 0;
+    max-width: none;
+    position: sticky;
+    top: 96px;
+}
+
+.admin-section .video-admin .title,
+.admin-preview .title {
+    margin: 0 0 14px;
+    color: var(--accent);
+    text-align: left;
+}
+
+.admin-preview {
+    min-width: 0;
+    padding: 18px;
+    background: #101010;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+}
+
+.admin-preview .gallery {
+    margin-top: 0;
+}
+
+@media (max-width: 860px) {
+    .admin-section {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-section .video-admin {
+        position: static;
+    }
+}
+
 #Videos .gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

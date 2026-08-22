@@ -40,218 +40,59 @@
         </div>
 
         <nav>
-        <a href="#servicios">Servicios</a>
+        <a href="./">Ver sitio público</a>
         <a href="#Videos">Videos</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#testimonios">Feedback</a>
-        <a class="cta" href="https://geothecubanbarberelite.booksy.com/a/">Reservar</a>
         </nav>
     </header>
         
 
-        <!----HERO----->
-    <main>
-        <div class="hero">
-        <div class="hero-card">
-            <div class="eyebrow">Barbero & Estilista de Cabello</div>
-            <h1>Cortes clásicos y modernos para cada estilo</h1>
-            <p class="lead">Atención personalizada, productos premium y barbero con experiencia. Reserva tu turno y luce tu estilo con el mejor acabado.</p>
-
-            <div class="hero-actions">
-            <a class="btn" href="#servicios">Ver servicios</a>
-            </div>
-
-            <div style="display:flex;gap:12px;margin-top:18px;color: #fff;font-size:14px">
-            <div>✂️ Cortes</div>
-            <div>🧔 Afeitado Clásico & Moderno</div>
-            <div>💈 Corte + Barba</div>
-            </div>
-        </div>
-
-        <aside class="booking">
-            <h2>Reserva rápida</h2>
-            <div class="info">
-                Elija día y hora o envía un mensaje por WhatsApp para agendar su cita rápida. Horarios:
-                <ul>
-                    <li>Lun - Miér • 09:00 - 18:00</li>
-                    <li>Jue - Sáb • 09:00 - 20:00</li>
-                </ul>
-            </div>
-        
-
-<!----CODIGO DE CALENDARIO DE CITAS-->
-            <div class="calendar-widget">
-    <h3>Agenda tu cita 💈</h3>
-
-    <label for="date">Selecciona fecha</label>
-    <input type="date" id="date">
-
-    <label for="time">Selecciona hora</label>
-    <select id="time">
-        <option value="">-- Elegir hora --</option>
-    </select>
-
-            <a 
-            class="cta reservar-btn"
-            href="https://geothecubanbarberelite.booksy.com/a/"
-            target="_blank">Reservar cita</a>
-        </div>
-        </aside>
-        </div>
-
-        <!----SERVICIOS---->
-        <section id="servicios">
-        <h2 style="color:#fff;margin-bottom:12px">Servicios</h2>
-        <div class="grid-3">
-            <div class="service">
-            <h3>Corte clásico</h3>
-            <p style="color:#fff;font-size:14px">Técnicas tradicionales con máquina y tijera para un acabado limpio y duradero.</p>
-            </div>
-            <div class="service">
-            <h3>Fade moderno</h3>
-            <p style="color:#fff;font-size:14px">Degradados precisos y estilizados para un look contemporáneo.</p>
-            </div>
-            <div class="service">
-            <h3>Afeitado a navaja</h3>
-            <p style="color:#fff;font-size:14px">Afeitado caliente con toallas y productos de primera.</p>
-            </div>
-        </div>
+        <!----ADMIN PANEL----->
+    <main class="admin-main">
+        <section class="admin-hero" aria-labelledby="adminTitle">
+            <div class="eyebrow">Panel administrativo</div>
+            <h1 id="adminTitle">Gestión de videos</h1>
+            <p class="lead">Inicia sesión con tu cuenta autorizada para publicar o reemplazar videos de la galería pública.</p>
         </section>
 
-        
         <!-- ===== SECCIÓN VIDEOS ===== -->
-<section id="Videos">
-    <h2 class="title" style="color:var(--accent); margin:16px 0">Videos</h2>
-
-    <div class="gallery">
-
-        <!-- SLOT 1 -->
-        <div class="video-slot">
-            <!-- Lite YouTube: evita cargar JS pesado hasta interaccion -->
-            <div class="yt-lite" id="video-1" data-youtube-id="uc74opVB7ZY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-            <noscript><a href="https://www.youtube.com/watch?v=uc74opVB7ZY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-
-        </div>
-
-        <!-- SLOT 2 -->
-        <div class="video-slot">
-            <div class="yt-lite" id="video-2" data-youtube-id="Ib2IEvymir4" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-            <noscript><a href="https://www.youtube.com/watch?v=Ib2IEvymir4" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-
-        </div>
-
-        <!-- SLOT 3 -->
-        <div class="video-slot">
-            <div class="yt-lite" id="video-3" data-youtube-id="OK0iH631dmY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-            <noscript><a href="https://www.youtube.com/watch?v=OK0iH631dmY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-        </div>
-
-    </div>
-
-    <div class="video-admin" id="videoAdmin">
-        <h3>Agregar nuevo video</h3>
-        <div class="video-auth" id="videoAuth">
-            <p>Solo el administrador puede subir videos.</p>
-            <div class="video-auth-actions">
-                <button id="videoLogin" class="btn" type="button">Iniciar sesión con Google</button>
-                <button id="videoLogout" class="btn btn-ghost" type="button">Cerrar sesión</button>
-            </div>
-            <p id="videoAuthStatus" class="video-status" aria-live="polite"></p>
-        </div>
-        <form id="videoForm">
-            <input id="videoUrl" type="text" placeholder="Pega el link de YouTube o el ID" required />
-            <input id="videoPos" type="number" min="1" step="1" placeholder="Posición (opcional: 1,2,3...)" />
-            <button type="submit" class="btn">Subir video</button>
-            <p id="videoStatus" class="video-status" aria-live="polite"></p>
-        </form>
-    </div>
-
-</section>
-
-        <section class="seo-text" style="display:none">
-    <h2>Barbería en Blue Island</h2>
-    <p>
-        Geo The Cuban Barber ofrece cortes clásicos, fades modernos,
-        arreglo de barba y estilo profesional en Blue Island.
-        Reserva tu cita online y disfruta de una experiencia premium.
-    </p>
-</section>
-
-        <!-- FEEDBACK -->
-<section id="testimonios" class="testimonios">
-    <div>
-        <h2 class="title" >Feedback</h2>
-
-        <div class="reviews">
-    <h3>Opiniones de clientes</h3>
-    <div id="reviewsList" class="reviews-grid"></div>
-        </div>
-
-        <!-- FORMULARIO FEEDBACK -->
-        <form id="feedbackForm" class="feedback-form">
-            <input class="name" type="text" id="fb-name" placeholder="Tu nombre/Name" required>
-
-            <!-- ESTRELLAS -->
-            <div class="stars">
-                <input type="radio" name="rating" id="star5" value="5" required>
-                <label for="star5">&#9733;</label>
-
-                <input type="radio" name="rating" id="star4" value="4">
-                <label for="star4">&#9733;</label>
-
-                <input type="radio" name="rating" id="star3" value="3">
-                <label for="star3">&#9733;</label>
-
-                <input type="radio" name="rating" id="star2" value="2">
-                <label for="star2">&#9733;</label>
-
-                <input type="radio" name="rating" id="star1" value="1">
-                <label for="star1">&#9733;</label>
+        <section id="Videos" class="admin-section">
+            <div class="video-admin" id="videoAdmin">
+                <h2 class="title">Subir videos</h2>
+                <div class="video-auth" id="videoAuth">
+                    <p>Acceso exclusivo para administrador.</p>
+                    <div class="video-auth-actions">
+                        <button id="videoLogin" class="btn" type="button">Iniciar sesión con Google</button>
+                        <button id="videoLogout" class="btn btn-ghost" type="button">Cerrar sesión</button>
+                    </div>
+                    <p id="videoAuthStatus" class="video-status" aria-live="polite"></p>
+                </div>
+                <form id="videoForm">
+                    <input id="videoUrl" type="text" placeholder="Link de YouTube o ID del video" required />
+                    <input id="videoPos" type="number" min="1" step="1" placeholder="Posición: 1, 2, 3..." />
+                    <button type="submit" class="btn">Guardar video</button>
+                    <p id="videoStatus" class="video-status" aria-live="polite"></p>
+                </form>
             </div>
 
-            <textarea  id="fb-message" placeholder="Escribe tu opinión/Feedback" required></textarea>
-
-            <button type="submit" class="btn">Enviar opinión/Send Feedback</button>
-
-    
-        </form>
-
-
-        <!-----CODIGO DE CONTACTO----->
-        <section id="contacto" style="margin-top:18px">
-        <h2 class="title" style="color:var(--accent);margin-bottom:8px">Contacto</h2>
-        <img class="logo-1" src="imagenes/Geo-The-Cuban-Barber.png" alt="barber" width="56" height="56" loading="lazy" decoding="async"/>
-
-        <div class="about">
-            <div>
-            <p style="color:#fff;max-width:560px">Visítanos en nuestra barbería para una experiencia completa: cortes, barbas, arreglos y productos exclusivos. También ofrecemos atención a domicilio por solicitud previa.</p>
-            <ul style="margin-top:12px;list-style:none">
-                <li>📍 Dirección: 1329 W 18th St, Chicago, IL 60608</li>
-                <li>📞 Tel: +1 (727) 777-3925</li>
-                <li>⏰Lun - Miér 09:00 - 18:00</li>
-                <li>Jue - Sáb 09:00 - 20:00</li>
-            </ul>
-            <div class="map-embed" aria-label="Ubicación en Google Maps">
-                <!-- Lite Maps: carga el iframe solo si el usuario lo pide -->
-                <div
-                    class="map-lite"
-                    data-map-src="https://www.google.com/maps?q=13325%20Old%20Western%20Ave%2C%20Blue%20Island%2C%2060406&output=embed"
-                    role="button"
-                    tabindex="0"
-                    aria-label="Cargar mapa de Google Maps">
-                    <div class="map-lite-inner">
-                        <div class="map-lite-title">Ver mapa</div>
-                        <div class="map-lite-sub">Toca para cargar Google Maps</div>
+            <div class="admin-preview" aria-label="Vista previa de videos publicados">
+                <h2 class="title">Videos publicados</h2>
+                <div class="gallery">
+                    <div class="video-slot">
+                        <div class="yt-lite" id="video-1" data-youtube-id="uc74opVB7ZY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                        <noscript><a href="https://www.youtube.com/watch?v=uc74opVB7ZY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                    </div>
+                    <div class="video-slot">
+                        <div class="yt-lite" id="video-2" data-youtube-id="Ib2IEvymir4" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                        <noscript><a href="https://www.youtube.com/watch?v=Ib2IEvymir4" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                    </div>
+                    <div class="video-slot">
+                        <div class="yt-lite" id="video-3" data-youtube-id="OK0iH631dmY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                        <noscript><a href="https://www.youtube.com/watch?v=OK0iH631dmY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
                     </div>
                 </div>
-                <noscript><a href="https://www.google.com/maps?q=13325%20Old%20Western%20Ave%2C%20Blue%20Island%2C%2060406" rel="noopener" target="_blank">Abrir ubicación en Google Maps</a></noscript>
-
-            </div>
-            </div>
             </div>
         </section>
     </main>
-
 
     <!-----FOOTER----->
     <footer>
@@ -283,109 +124,7 @@
     </footer>
 
     <!----SCRIPT--->
-    <script>
-/* ===== CONFIGURACIÓN DE HORARIOS ===== */
-const horaApertura = 9;   // 9 AM
-const horaCierre   = 18;  // 6 PM
-const intervalo    = 60;  // minutos (30, 45, 60)
-
-/* ===== ELEMENTOS ===== */
-const timeSelect = document.getElementById("time");
-const dateInput  = document.getElementById("date");
-
-/* ===== GENERAR HORAS ===== */
-function generarHorarios() {
-    const horas = [];
-    for (let h = horaApertura; h < horaCierre; h++) {
-        for (let m = 0; m < 60; m += intervalo) {
-            const hora = String(h).padStart(2, "0");
-            const min  = String(m).padStart(2, "0");
-            horas.push(`${hora}:${min}`);
-        }
-    }
-    return horas;
-}
-
-dateInput.addEventListener("change", cargarHoras);
-
-/* ===== CARGAR HORAS DISPONIBLES ===== */
-function cargarHoras() {
-    timeSelect.innerHTML = '<option value="">-- Elegir hora --</option>';
-    const fecha = dateInput.value;
-    const citas = JSON.parse(localStorage.getItem("citas")) || [];
-    const horarios = generarHorarios();
-
-    horarios.forEach(hora => {
-        const ocupado = citas.some(c => c.fecha === fecha && c.hora === hora);
-        if (!ocupado) {
-            const option = document.createElement("option");
-            option.value = hora;
-            option.textContent = hora;
-            timeSelect.appendChild(option);
-        }
-    });
-}
-
-/* ===== RESERVAR CITA ===== */
-function reservar() {
-    const fecha = dateInput.value;
-    const hora  = timeSelect.value;
-
-    if (!fecha || !hora) {
-        alert("⚠️ Completa todos los campos");
-        return;
-    }
-
-    const citas = JSON.parse(localStorage.getItem("citas")) || [];
-    citas.push({ fecha, hora });
-    localStorage.setItem("citas", JSON.stringify(citas));
-
-    alert("✅ Cita reservada correctamente");
-    cargarHoras();
-}
-
-/* ===== FEEDBACK ===== */
-document.addEventListener("DOMContentLoaded", () => {
-    const feedbackForm = document.getElementById("feedbackForm");
-    const reviewsList = document.getElementById("reviewsList");
-
-    if (feedbackForm && reviewsList) {
-        // Cargar reviews guardadas
-        const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-        reviews.forEach(r => renderReview(r));
-
-        // Enviar review
-        feedbackForm.addEventListener("submit", e => {
-            e.preventDefault();
-
-            const name = document.getElementById("fb-name").value.trim();
-            const message = document.getElementById("fb-message").value.trim();
-            const rating = document.querySelector('input[name="rating"]:checked')?.value;
-
-            if (!name || !message || !rating) return;
-
-            const review = { name, message, rating };
-            reviews.unshift(review);
-            localStorage.setItem("reviews", JSON.stringify(reviews));
-
-            renderReview(review);
-            feedbackForm.reset();
-});
-
-        // Función para mostrar review
-        function renderReview(r) {
-            const div = document.createElement("div");
-            div.className = "review-card";
-            div.innerHTML = `
-                <strong>${r.name}</strong>
-                <div class="stars">${"\u2605".repeat(r.rating)}</div>
-                <p>${r.message}</p>
-            `;
-            reviewsList.prepend(div);
-        }
-    }
-});
-</script>
+    
 
 <script>
 // Lite embeds: evita bajar JS pesado de YouTube/Maps en el render inicial.
