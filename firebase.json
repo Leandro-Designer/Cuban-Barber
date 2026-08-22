@@ -3,8 +3,16 @@
                     "public":  ".",
                     "ignore":  [
                                    "firebase.json",
-                                   "**/.*",
-                                   "**/node_modules/**"
+                                   ".firebaserc",
+                                   ".gitignore",
+                                   "**/node_modules/**",
+                                   ".git",
+                                   ".git/**",
+                                   ".firebase",
+                                   ".firebase/**",
+                                   ".vscode",
+                                   ".vscode/**",
+                                   "firebase-debug.log"
                                ],
                     "cleanUrls":  true,
                     "rewrites":  [

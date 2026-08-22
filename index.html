@@ -174,19 +174,19 @@
             <!-- ESTRELLAS -->
             <div class="stars">
                 <input type="radio" name="rating" id="star5" value="5" required>
-                <label for="star5">â˜…</label>
+                <label for="star5">&#9733;</label>
 
                 <input type="radio" name="rating" id="star4" value="4">
-                <label for="star4">â˜…</label>
+                <label for="star4">&#9733;</label>
 
                 <input type="radio" name="rating" id="star3" value="3">
-                <label for="star3">â˜…</label>
+                <label for="star3">&#9733;</label>
 
                 <input type="radio" name="rating" id="star2" value="2">
-                <label for="star2">â˜…</label>
+                <label for="star2">&#9733;</label>
 
                 <input type="radio" name="rating" id="star1" value="1">
-                <label for="star1">â˜…</label>
+                <label for="star1">&#9733;</label>
             </div>
 
             <textarea  id="fb-message" placeholder="Escribe tu opiniÃ³n/Feedback" required></textarea>
@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
             div.className = "review-card";
             div.innerHTML = `
                 <strong>${r.name}</strong>
-                <div class="stars">${"â˜…".repeat(r.rating)}</div>
+                <div class="stars">${"\u2605".repeat(r.rating)}</div>
                 <p>${r.message}</p>
             `;
             reviewsList.prepend(div);
@@ -583,4 +583,5 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 </body>
 </html>
+
 
