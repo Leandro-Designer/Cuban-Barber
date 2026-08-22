@@ -23,108 +23,97 @@
     <link rel="icon" href="imagenes/Geo-The-Cuban-Barber.png" sizes="32x32" type="image/png">
     <link rel="stylesheet" href="index.css">
 </head>
-<body>
-    <div class="container">
-        
+<body class="admin-page">
+    <div class="container admin-shell">
+        <header class="admin-topbar">
+            <a class="admin-brand" href="./" aria-label="Volver al sitio público">
+                <img class="logo-1" src="imagenes/Geo-The-Cuban-Barber.png" alt="Geo The Cuban Barber" width="56" height="56" decoding="async" fetchpriority="high">
+                <span>
+                    <strong>Geo The Cuban Barber</strong>
+                    <small>Panel administrativo</small>
+                </span>
+            </a>
+            <nav class="admin-nav" aria-label="Navegación del panel">
+                <a href="./">Sitio público</a>
+                <a href="#Videos">Videos</a>
+            </nav>
+        </header>
 
-        <!---HEADER--->
-    <header>
-        <div class="brand">
-        <div class="logo">
-            <img class="logo-1" src="imagenes/Geo-The-Cuban-Barber.png" alt="Icono" width="56" height="56" decoding="async" fetchpriority="high">
-        </div>
-        <div class="logo-presentacion">
-            <div style="font-weight:700;color:#fff">Geo The Cuban Barber</div>
-            <div style="font-size:12px;color: #fff">Donde el estilo se vuelve tradición</div>
-        </div>
-        </div>
-
-        <nav>
-        <a href="./">Ver sitio público</a>
-        <a href="#Videos">Videos</a>
-        </nav>
-    </header>
-        
-
-        <!----ADMIN PANEL----->
-    <main class="admin-main">
-        <section class="admin-hero" aria-labelledby="adminTitle">
-            <div class="eyebrow">Panel administrativo</div>
-            <h1 id="adminTitle">Gestión de videos</h1>
-            <p class="lead">Inicia sesión con tu cuenta autorizada para publicar o reemplazar videos de la galería pública.</p>
-        </section>
-
-        <!-- ===== SECCIÓN VIDEOS ===== -->
-        <section id="Videos" class="admin-section">
-            <div class="video-admin" id="videoAdmin">
-                <h2 class="title">Subir videos</h2>
-                <div class="video-auth" id="videoAuth">
-                    <p>Acceso exclusivo para administrador.</p>
-                    <div class="video-auth-actions">
-                        <button id="videoLogin" class="btn" type="button">Iniciar sesión con Google</button>
-                        <button id="videoLogout" class="btn btn-ghost" type="button">Cerrar sesión</button>
-                    </div>
-                    <p id="videoAuthStatus" class="video-status" aria-live="polite"></p>
+        <main class="admin-main">
+            <section class="admin-hero" aria-labelledby="adminTitle">
+                <div>
+                    <span class="admin-kicker">Gestión de contenido</span>
+                    <h1 id="adminTitle">Videos de la página pública</h1>
+                    <p>Sube o reemplaza videos de YouTube desde un panel separado, claro y enfocado solo en administración.</p>
                 </div>
-                <form id="videoForm">
-                    <input id="videoUrl" type="text" placeholder="Link de YouTube o ID del video" required />
-                    <input id="videoPos" type="number" min="1" step="1" placeholder="Posición: 1, 2, 3..." />
-                    <button type="submit" class="btn">Guardar video</button>
-                    <p id="videoStatus" class="video-status" aria-live="polite"></p>
-                </form>
-            </div>
+                <a class="btn btn-ghost" href="./">Ver sitio</a>
+            </section>
 
-            <div class="admin-preview" aria-label="Vista previa de videos publicados">
-                <h2 class="title">Videos publicados</h2>
-                <div class="gallery">
-                    <div class="video-slot">
-                        <div class="yt-lite" id="video-1" data-youtube-id="uc74opVB7ZY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-                        <noscript><a href="https://www.youtube.com/watch?v=uc74opVB7ZY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+            <section id="Videos" class="admin-section" aria-label="Administrador de videos">
+                <article class="admin-card video-admin" id="videoAdmin">
+                    <div class="admin-card-header">
+                        <span class="admin-kicker">Publicación</span>
+                        <h2>Subir video</h2>
+                        <p>Pega un enlace de YouTube o el ID del video. Puedes indicar una posición para reemplazar un slot existente.</p>
                     </div>
-                    <div class="video-slot">
-                        <div class="yt-lite" id="video-2" data-youtube-id="Ib2IEvymir4" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-                        <noscript><a href="https://www.youtube.com/watch?v=Ib2IEvymir4" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-                    </div>
-                    <div class="video-slot">
-                        <div class="yt-lite" id="video-3" data-youtube-id="OK0iH631dmY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-                        <noscript><a href="https://www.youtube.com/watch?v=OK0iH631dmY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
 
-    <!-----FOOTER----->
-    <footer>
-            <div class="container">
-        <p class="contenido">©2026 Geo The Cuban Barber. Todos los derechos reservados</p>
-        <p>Desarrollado por <a href="https://wa.me/+5551999422335" target="_blank">Leandro Milan</a></p>
+                    <div class="video-auth" id="videoAuth">
+                        <div>
+                            <strong>Acceso de administrador</strong>
+                            <p>Inicia sesión para activar el formulario.</p>
+                        </div>
+                        <div class="video-auth-actions">
+                            <button id="videoLogin" class="btn" type="button">Iniciar sesión con Google</button>
+                            <button id="videoLogout" class="btn btn-ghost" type="button">Cerrar sesión</button>
+                        </div>
+                        <p id="videoAuthStatus" class="video-status" aria-live="polite"></p>
+                    </div>
+
+                    <form id="videoForm" class="admin-video-form">
+                        <div class="admin-field">
+                            <label for="videoUrl">Video de YouTube</label>
+                            <input id="videoUrl" type="text" placeholder="https://youtu.be/abc123xyz90" required />
+                        </div>
+                        <div class="admin-field">
+                            <label for="videoPos">Posición</label>
+                            <input id="videoPos" type="number" min="1" step="1" placeholder="Auto o 1, 2, 3..." />
+                        </div>
+                        <button type="submit" class="btn admin-submit">Guardar video</button>
+                        <p id="videoStatus" class="video-status" aria-live="polite"></p>
+                    </form>
+                </article>
+
+                <article class="admin-card admin-preview" aria-label="Vista previa de videos publicados">
+                    <div class="admin-card-header">
+                        <span class="admin-kicker">Vista previa</span>
+                        <h2>Videos publicados</h2>
+                        <p>Referencia rápida de los videos que se muestran en la sección pública.</p>
+                    </div>
+                    <div class="gallery admin-video-grid">
+                        <div class="video-slot">
+                            <div class="yt-lite" id="video-1" data-youtube-id="uc74opVB7ZY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                            <noscript><a href="https://www.youtube.com/watch?v=uc74opVB7ZY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                        </div>
+                        <div class="video-slot">
+                            <div class="yt-lite" id="video-2" data-youtube-id="Ib2IEvymir4" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                            <noscript><a href="https://www.youtube.com/watch?v=Ib2IEvymir4" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                        </div>
+                        <div class="video-slot">
+                            <div class="yt-lite" id="video-3" data-youtube-id="OK0iH631dmY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                            <noscript><a href="https://www.youtube.com/watch?v=OK0iH631dmY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <footer class="admin-footer">
+            <span>Geo The Cuban Barber Admin</span>
+            <span>©2026 Leandro Milan</span>
+        </footer>
     </div>
 
-    <div class="social-box">
-            <h2>Redes Sociales</h2>
-
-            <a href="https://wa.me/+17277773925">
-                <img src="imagenes/whatsapp.png" alt="Icono de WhatsApp" width="34" height="34" loading="lazy" decoding="async">
-            </a>
-
-            <a href="https://www.tiktok.com/@geo.barber.cuba">
-                <img src="imagenes/tik-tok.png" alt="Icon-tiktok" width="34" height="34" loading="lazy" decoding="async">
-            </a>
-
-            <a href="https://www.instagram.com/geothecubanbarber?igsh=MWhvMmZidWdjMG91bA==">
-                <img src="imagenes/instagram.png" alt="Icon-Instagram" width="34" height="34" loading="lazy" decoding="async">
-            </a>
-
-            <a href="https://geothecubanbarberelite.booksy.com/a/">
-                <img class="booksy" src="imagenes/booksy.png" alt="Icon-Booksy" width="42" height="34" loading="lazy" decoding="async">
-            </a>
-        </div>
-        
-    </footer>
-
-    <!----SCRIPT--->
-    
+    <!----SCRIPT---->
 
 <script>
 // Lite embeds: evita bajar JS pesado de YouTube/Maps en el render inicial.
