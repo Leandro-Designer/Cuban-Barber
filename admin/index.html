@@ -1,7 +1,8 @@
 ﻿<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
+    
+    <base href="../"><meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="Geo The Cuban Barber en Blue Island. Cortes clÃ¡sicos, fade moderno, barba y estilo profesional. Reserva tu cita online.">
     <meta name="keywords" content="barberÃ­a, barber shop, cortes de cabello, fade, barba, Geo Cuban Barber, Blue Island barber">
@@ -13,7 +14,7 @@
 <meta property="og:image" content="https://leandro-designer.github.io/Cuban-Barber/imagenes/Geo-Barbe-Cuba.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://leandro-designer.github.io/Cuban-Barber/">
-    <title>Geo-Cuban-Barber â€” Corte & Estilo</title>
+    <title>Geo The Cuban Barber | Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="canonical" href="https://leandro-designer.github.io/Cuban-Barber/">
@@ -146,6 +147,25 @@
         </div>
 
     </div>
+
+    <div class="video-admin" id="videoAdmin">
+        <h3>Agregar nuevo video</h3>
+        <div class="video-auth" id="videoAuth">
+            <p>Solo el administrador puede subir videos.</p>
+            <div class="video-auth-actions">
+                <button id="videoLogin" class="btn" type="button">Iniciar sesiÃ³n con Google</button>
+                <button id="videoLogout" class="btn btn-ghost" type="button">Cerrar sesiÃ³n</button>
+            </div>
+            <p id="videoAuthStatus" class="video-status" aria-live="polite"></p>
+        </div>
+        <form id="videoForm">
+            <input id="videoUrl" type="text" placeholder="Pega el link de YouTube o el ID" required />
+            <input id="videoPos" type="number" min="1" step="1" placeholder="PosiciÃ³n (opcional: 1,2,3...)" />
+            <button type="submit" class="btn">Subir video</button>
+            <p id="videoStatus" class="video-status" aria-live="polite"></p>
+        </form>
+    </div>
+
 </section>
 
         <section class="seo-text" style="display:none">
@@ -468,7 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script>
-// Firebase: carga solo los videos publicados para la pagina publica.
+// Firebase: difiere carga y ejecucion hasta que la seccion de Videos este cerca del viewport.
 (() => {
     let started = false;
 
@@ -478,9 +498,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const [
             { initializeApp },
-            { getFirestore, collection, getDocs },
+            { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut },
+            { getFirestore, collection, getDocs, doc, setDoc },
         ] = await Promise.all([
             import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"),
+            import("https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"),
             import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"),
         ]);
 
@@ -494,8 +516,29 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         const db = getFirestore(app);
         const lite = window.__liteEmbeds;
+
+        function extractYoutubeId(input) {
+            const value = (input || "").trim();
+            if (!value) return "";
+
+            if (/^[a-zA-Z0-9_-]{11}$/.test(value)) return value;
+
+            try {
+                const url = new URL(value);
+                if (url.hostname.includes("youtu.be")) {
+                    return url.pathname.replace("/", "");
+                }
+                if (url.hostname.includes("youtube.com")) {
+                    return url.searchParams.get("v") || "";
+                }
+            } catch (_) {
+                return "";
+            }
+            return "";
+        }
 
         function ensureVideoSlots(count) {
             const gallery = document.querySelector("#Videos .gallery");
@@ -549,9 +592,93 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        loadVideos().catch((err) => {
-            console.error("No se pudieron cargar los videos.", err);
+        loadVideos();
+
+        const videoForm = document.getElementById("videoForm");
+        const videoLogin = document.getElementById("videoLogin");
+        const videoLogout = document.getElementById("videoLogout");
+        const videoAuthStatus = document.getElementById("videoAuthStatus");
+        const videoUrl = document.getElementById("videoUrl");
+        const videoPos = document.getElementById("videoPos");
+        const videoStatus = document.getElementById("videoStatus");
+        const adminEmails = ["geordanyperez1@gmail.com", "leandro850825@gmail.com"];
+
+        function setAdminUi(isAdmin, userEmail = "") {
+            if (!videoForm) return;
+            videoForm.style.display = isAdmin ? "grid" : "none";
+            if (videoLogout) videoLogout.style.display = isAdmin ? "inline-flex" : "none";
+            if (videoLogin) videoLogin.style.display = isAdmin ? "none" : "inline-flex";
+            if (videoAuthStatus) {
+                videoAuthStatus.textContent = isAdmin
+                    ? `Conectado como ${userEmail}`
+                    : "Debes iniciar sesion para subir videos.";
+            }
+        }
+
+        if (videoLogin) {
+            videoLogin.addEventListener("click", async () => {
+                try {
+                    const provider = new GoogleAuthProvider();
+                    await signInWithPopup(auth, provider);
+                } catch (err) {
+                    if (videoAuthStatus) videoAuthStatus.textContent = "No se pudo iniciar sesion.";
+                }
+            });
+        }
+
+        if (videoLogout) {
+            videoLogout.addEventListener("click", async () => {
+                await signOut(auth);
+            });
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user && adminEmails.includes(user.email)) {
+                setAdminUi(true, user.email);
+            } else {
+                setAdminUi(false);
+            }
         });
+
+        if (videoForm) {
+            videoForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const user = auth.currentUser;
+                if (!user || !adminEmails.includes(user.email)) {
+                    if (videoStatus) videoStatus.textContent = "No autorizado. Inicia sesion con tu cuenta admin.";
+                    return;
+                }
+
+                const youtubeId = extractYoutubeId(videoUrl?.value);
+                if (!youtubeId) {
+                    if (videoStatus) videoStatus.textContent = "Link/ID invalido. Ej: https://youtu.be/abc123xyz90";
+                    return;
+                }
+
+                const snapshot = await getDocs(collection(db, "videos"));
+                const ids = snapshot.docs.map((d) => d.id);
+                const numbers = ids
+                    .map((id) => {
+                        const m = /^video-(\d+)$/i.exec(id);
+                        return m ? Number(m[1]) : null;
+                    })
+                    .filter((n) => Number.isFinite(n));
+
+                let targetNumber = Number.parseInt(videoPos?.value, 10);
+                if (!Number.isFinite(targetNumber) || targetNumber <= 0) {
+                    targetNumber = numbers.length ? Math.max(...numbers) + 1 : 1;
+                }
+
+                await setDoc(doc(db, "videos", `video-${targetNumber}`), {
+                    youtubeId,
+                });
+
+                if (videoStatus) videoStatus.textContent = `Video guardado en video-${targetNumber}`;
+                videoForm.reset();
+                await loadVideos();
+            });
+        }
     }
 
     function scheduleStart() {
