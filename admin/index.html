@@ -7,7 +7,7 @@
     <meta name="description" content="Geo The Cuban Barber en Blue Island. Cortes clásicos, fade moderno, barba y estilo profesional. Reserva tu cita online.">
     <meta name="keywords" content="barbería, barber shop, cortes de cabello, fade, barba, Geo Cuban Barber, Blue Island barber">
     <meta property="og:title" content="Geo The Cuban Barber — Corte & Estilo">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="noindex, nofollow">
 <meta name="Leandro Milan" content="Geo The Cuban Barber">
 <meta name="theme-color" content="#000000">
 <meta property="og:description" content="Cortes clásicos, modernos y barba profesional en Blue Island. Reserva tu cita ahora.">
@@ -16,8 +16,7 @@
 <meta property="og:url" content="https://leandro-designer.github.io/Cuban-Barber/">
     <title>Geo The Cuban Barber | Admin</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="canonical" href="https://leandro-designer.github.io/Cuban-Barber/">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap"></noscript>
     <link rel="icon" href="imagenes/Geo-The-Cuban-Barber.png" sizes="32x32" type="image/png">
@@ -44,66 +43,80 @@
                 <div>
                     <span class="admin-kicker">Gestión de contenido</span>
                     <h1 id="adminTitle">Videos de la página pública</h1>
-                    <p>Sube o reemplaza videos de YouTube desde un panel separado, claro y enfocado solo en administración.</p>
+                    <p>Primero inicia sesión. Luego podrás publicar, reordenar o eliminar videos sin mezclar el panel con la landing.</p>
                 </div>
                 <a class="btn btn-ghost" href="./">Ver sitio</a>
             </section>
 
             <section id="Videos" class="admin-section" aria-label="Administrador de videos">
-                <article class="admin-card video-admin" id="videoAdmin">
+                <article class="admin-card admin-login-card" id="videoAuth">
                     <div class="admin-card-header">
-                        <span class="admin-kicker">Publicación</span>
-                        <h2>Subir video</h2>
-                        <p>Pega un enlace de YouTube o el ID del video. Puedes indicar una posición para reemplazar un slot existente.</p>
+                        <span class="admin-kicker">Acceso</span>
+                        <h2>Iniciar sesión</h2>
+                        <p>Usa una cuenta autorizada para entrar al dashboard de videos.</p>
                     </div>
-
-                    <div class="video-auth" id="videoAuth">
-                        <div>
-                            <strong>Acceso de administrador</strong>
-                            <p>Inicia sesión para activar el formulario.</p>
-                        </div>
+                    <div class="video-auth">
                         <div class="video-auth-actions">
                             <button id="videoLogin" class="btn" type="button">Iniciar sesión con Google</button>
-                            <button id="videoLogout" class="btn btn-ghost" type="button">Cerrar sesión</button>
+                            <button id="videoLogout" class="btn btn-ghost" type="button" hidden>Cerrar sesión</button>
                         </div>
-                        <p id="videoAuthStatus" class="video-status" aria-live="polite"></p>
-                    </div>
-
-                    <form id="videoForm" class="admin-video-form">
-                        <div class="admin-field">
-                            <label for="videoUrl">Video de YouTube</label>
-                            <input id="videoUrl" type="text" placeholder="https://youtu.be/abc123xyz90" required />
-                        </div>
-                        <div class="admin-field">
-                            <label for="videoPos">Posición</label>
-                            <input id="videoPos" type="number" min="1" step="1" placeholder="Auto o 1, 2, 3..." />
-                        </div>
-                        <button type="submit" class="btn admin-submit">Guardar video</button>
-                        <p id="videoStatus" class="video-status" aria-live="polite"></p>
-                    </form>
-                </article>
-
-                <article class="admin-card admin-preview" aria-label="Vista previa de videos publicados">
-                    <div class="admin-card-header">
-                        <span class="admin-kicker">Vista previa</span>
-                        <h2>Videos publicados</h2>
-                        <p>Referencia rápida de los videos que se muestran en la sección pública.</p>
-                    </div>
-                    <div class="gallery admin-video-grid">
-                        <div class="video-slot">
-                            <div class="yt-lite" id="video-1" data-youtube-id="uc74opVB7ZY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-                            <noscript><a href="https://www.youtube.com/watch?v=uc74opVB7ZY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-                        </div>
-                        <div class="video-slot">
-                            <div class="yt-lite" id="video-2" data-youtube-id="Ib2IEvymir4" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-                            <noscript><a href="https://www.youtube.com/watch?v=Ib2IEvymir4" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-                        </div>
-                        <div class="video-slot">
-                            <div class="yt-lite" id="video-3" data-youtube-id="OK0iH631dmY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
-                            <noscript><a href="https://www.youtube.com/watch?v=OK0iH631dmY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
-                        </div>
+                        <p id="videoAuthStatus" class="video-status" aria-live="polite">Esperando autenticación.</p>
                     </div>
                 </article>
+
+                <div class="admin-dashboard" id="videoDashboard" hidden>
+                    <article class="admin-card video-admin" id="videoAdmin">
+                        <div class="admin-card-header">
+                            <span class="admin-kicker">Publicación</span>
+                            <h2>Subir o reemplazar video</h2>
+                            <p>Pega un enlace de YouTube o el ID. La posición reemplaza un slot existente o crea uno nuevo.</p>
+                        </div>
+
+                        <form id="videoForm" class="admin-video-form">
+                            <div class="admin-field">
+                                <label for="videoUrl">Video de YouTube</label>
+                                <input id="videoUrl" type="text" placeholder="https://youtu.be/abc123xyz90" required />
+                            </div>
+                            <div class="admin-field">
+                                <label for="videoPos">Posición</label>
+                                <input id="videoPos" type="number" min="1" step="1" placeholder="Auto o 1, 2, 3..." />
+                            </div>
+                            <button type="submit" class="btn admin-submit">Guardar video</button>
+                            <p id="videoStatus" class="video-status" aria-live="polite"></p>
+                        </form>
+                    </article>
+
+                    <article class="admin-card admin-manager" aria-label="Gestión de videos existentes">
+                        <div class="admin-card-header">
+                            <span class="admin-kicker">CRUD</span>
+                            <h2>Gestionar videos existentes</h2>
+                            <p>Edita la posición, cambia el enlace o elimina videos publicados.</p>
+                        </div>
+                        <div id="videoManagerList" class="admin-video-list" aria-live="polite"></div>
+                    </article>
+
+                    <article class="admin-card admin-preview" aria-label="Vista previa de videos publicados">
+                        <div class="admin-card-header">
+                            <span class="admin-kicker">Vista previa</span>
+                            <h2>Videos publicados</h2>
+                            <p>Referencia rápida de los videos que se muestran en la sección pública.</p>
+                        </div>
+                        <div class="gallery admin-video-grid">
+                            <div class="video-slot">
+                                <div class="yt-lite" id="video-1" data-youtube-id="uc74opVB7ZY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                                <noscript><a href="https://www.youtube.com/watch?v=uc74opVB7ZY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                            </div>
+                            <div class="video-slot">
+                                <div class="yt-lite" id="video-2" data-youtube-id="Ib2IEvymir4" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                                <noscript><a href="https://www.youtube.com/watch?v=Ib2IEvymir4" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                            </div>
+                            <div class="video-slot">
+                                <div class="yt-lite" id="video-3" data-youtube-id="OK0iH631dmY" role="button" tabindex="0" aria-label="Reproducir video de YouTube"></div>
+                                <noscript><a href="https://www.youtube.com/watch?v=OK0iH631dmY" rel="noopener" target="_blank">Ver video en YouTube</a></noscript>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </section>
         </main>
 
@@ -216,7 +229,7 @@
 </script>
 
 <script>
-// Firebase: difiere carga y ejecución hasta que la seccion de Videos este cerca del viewport.
+// Firebase: carga el dashboard de videos solo dentro del panel administrativo.
 (() => {
     let started = false;
 
@@ -227,7 +240,7 @@
         const [
             { initializeApp },
             { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut },
-            { getFirestore, collection, getDocs, doc, setDoc },
+            { getFirestore, collection, getDocs, doc, setDoc, deleteDoc },
         ] = await Promise.all([
             import("https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"),
             import("https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"),
@@ -247,25 +260,55 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
         const lite = window.__liteEmbeds;
+        const adminEmails = ["geordanyperez1@gmail.com", "leandro850825@gmail.com"];
+
+        const videoDashboard = document.getElementById("videoDashboard");
+        const videoForm = document.getElementById("videoForm");
+        const videoLogin = document.getElementById("videoLogin");
+        const videoLogout = document.getElementById("videoLogout");
+        const videoAuthStatus = document.getElementById("videoAuthStatus");
+        const videoUrl = document.getElementById("videoUrl");
+        const videoPos = document.getElementById("videoPos");
+        const videoStatus = document.getElementById("videoStatus");
+        const videoManagerList = document.getElementById("videoManagerList");
+        let currentVideos = [];
 
         function extractYoutubeId(input) {
             const value = (input || "").trim();
             if (!value) return "";
-
             if (/^[a-zA-Z0-9_-]{11}$/.test(value)) return value;
-
             try {
                 const url = new URL(value);
-                if (url.hostname.includes("youtu.be")) {
-                    return url.pathname.replace("/", "");
-                }
-                if (url.hostname.includes("youtube.com")) {
-                    return url.searchParams.get("v") || "";
-                }
+                if (url.hostname.includes("youtu.be")) return url.pathname.replace("/", "");
+                if (url.hostname.includes("youtube.com")) return url.searchParams.get("v") || "";
             } catch (_) {
                 return "";
             }
             return "";
+        }
+
+        function videoNumber(id) {
+            const match = /^video-(\d+)$/i.exec(id || "");
+            return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
+        }
+
+        function sortVideos(items) {
+            return items.sort((a, b) => {
+                const diff = videoNumber(a.id) - videoNumber(b.id);
+                return Number.isFinite(diff) && diff !== 0 ? diff : a.id.localeCompare(b.id);
+            });
+        }
+
+        function isAdminUser(user) {
+            return Boolean(user && adminEmails.includes(user.email));
+        }
+
+        function clearPreview() {
+            document.querySelectorAll("#Videos .yt-lite").forEach((el) => {
+                el.dataset.youtubeId = "";
+                el.style.backgroundImage = "";
+                el.innerHTML = "";
+            });
         }
 
         function ensureVideoSlots(count) {
@@ -275,71 +318,97 @@
             for (let i = existing + 1; i <= count; i++) {
                 const slot = document.createElement("div");
                 slot.className = "video-slot";
-
                 const div = document.createElement("div");
                 div.className = "yt-lite";
                 div.id = `video-${i}`;
                 div.setAttribute("role", "button");
                 div.setAttribute("tabindex", "0");
                 div.setAttribute("aria-label", "Reproducir video de YouTube");
-
                 slot.appendChild(div);
                 gallery.appendChild(slot);
-
                 if (lite) lite.onLiteActivate(div, lite.activateLiteYoutube);
             }
         }
 
-        async function loadVideos() {
-            const snapshot = await getDocs(collection(db, "videos"));
-            if (snapshot.empty) return;
-
-            const items = snapshot.docs.map((d) => ({
-                id: d.id,
-                ...d.data(),
-            }));
-
-            items.sort((a, b) => {
-                const aMatch = /^video-(\d+)$/i.exec(a.id);
-                const bMatch = /^video-(\d+)$/i.exec(b.id);
-                if (aMatch && bMatch) {
-                    return Number(aMatch[1]) - Number(bMatch[1]);
-                }
-                return a.id.localeCompare(b.id);
-            });
-
-            ensureVideoSlots(items.length);
-
-            let index = 1;
-            items.forEach((item) => {
-                const el = document.getElementById(`video-${index}`);
-                if (el && item.youtubeId && lite) {
-                    lite.setLiteYoutubeThumb(el, item.youtubeId);
-                }
-                index++;
+        function renderPreview(items) {
+            ensureVideoSlots(Math.max(items.length, 3));
+            clearPreview();
+            items.forEach((item, index) => {
+                const el = document.getElementById(`video-${index + 1}`);
+                if (el && item.youtubeId && lite) lite.setLiteYoutubeThumb(el, item.youtubeId);
             });
         }
 
-        loadVideos();
+        function escapeHtml(value) {
+            return String(value || "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[ch]));
+        }
 
-        const videoForm = document.getElementById("videoForm");
-        const videoLogin = document.getElementById("videoLogin");
-        const videoLogout = document.getElementById("videoLogout");
-        const videoAuthStatus = document.getElementById("videoAuthStatus");
-        const videoUrl = document.getElementById("videoUrl");
-        const videoPos = document.getElementById("videoPos");
-        const videoStatus = document.getElementById("videoStatus");
-        const adminEmails = ["geordanyperez1@gmail.com", "leandro850825@gmail.com"];
+        function renderManager(items) {
+            if (!videoManagerList) return;
+            if (!items.length) {
+                videoManagerList.innerHTML = '<p class="admin-empty">Todavía no hay videos guardados.</p>';
+                return;
+            }
+            videoManagerList.innerHTML = "";
+            items.forEach((item, index) => {
+                const row = document.createElement("form");
+                row.className = "admin-video-row";
+                row.dataset.id = item.id;
+                row.innerHTML = `
+                    <div class="admin-video-meta">
+                        <strong>${item.id}</strong>
+                        <span>ID: ${escapeHtml(item.youtubeId || "sin video")}</span>
+                    </div>
+                    <label>
+                        Video
+                        <input name="youtube" type="text" value="${escapeHtml(item.youtubeId || "")}" aria-label="Video de ${item.id}">
+                    </label>
+                    <label>
+                        Posición
+                        <input name="position" type="number" min="1" step="1" value="${videoNumber(item.id) === Number.POSITIVE_INFINITY ? index + 1 : videoNumber(item.id)}" aria-label="Posición de ${item.id}">
+                    </label>
+                    <div class="admin-row-actions">
+                        <button class="btn btn-ghost" type="button" data-action="up" ${index === 0 ? "disabled" : ""}>Subir</button>
+                        <button class="btn btn-ghost" type="button" data-action="down" ${index === items.length - 1 ? "disabled" : ""}>Bajar</button>
+                        <button class="btn" type="submit">Guardar</button>
+                        <button class="btn btn-danger" type="button" data-action="delete">Eliminar</button>
+                    </div>
+                `;
+                videoManagerList.appendChild(row);
+            });
+        }
+
+        async function loadVideos() {
+            const snapshot = await getDocs(collection(db, "videos"));
+            currentVideos = sortVideos(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
+            renderPreview(currentVideos);
+            renderManager(currentVideos);
+        }
+
+        async function saveVideoAt(position, youtubeId) {
+            await setDoc(doc(db, "videos", `video-${position}`), { youtubeId });
+        }
+
+        async function moveVideo(index, direction) {
+            const targetIndex = index + direction;
+            if (targetIndex < 0 || targetIndex >= currentVideos.length) return;
+            const source = currentVideos[index];
+            const target = currentVideos[targetIndex];
+            await Promise.all([
+                setDoc(doc(db, "videos", source.id), { youtubeId: target.youtubeId }),
+                setDoc(doc(db, "videos", target.id), { youtubeId: source.youtubeId }),
+            ]);
+            await loadVideos();
+        }
 
         function setAdminUi(isAdmin, userEmail = "") {
-            if (!videoForm) return;
-            videoForm.style.display = isAdmin ? "grid" : "none";
-            if (videoLogout) videoLogout.style.display = isAdmin ? "inline-flex" : "none";
-            if (videoLogin) videoLogin.style.display = isAdmin ? "none" : "inline-flex";
+            if (videoDashboard) videoDashboard.hidden = !isAdmin;
+            if (videoLogout) videoLogout.hidden = !isAdmin;
+            if (videoLogin) videoLogin.hidden = isAdmin;
             if (videoAuthStatus) {
                 videoAuthStatus.textContent = isAdmin
                     ? `Conectado como ${userEmail}`
-                    : "Debes iniciar sesión para subir videos.";
+                    : "Inicia sesión con una cuenta autorizada para ver el dashboard.";
             }
         }
 
@@ -360,51 +429,81 @@
             });
         }
 
-        onAuthStateChanged(auth, (user) => {
-            if (user && adminEmails.includes(user.email)) {
-                setAdminUi(true, user.email);
-            } else {
-                setAdminUi(false);
-            }
+        onAuthStateChanged(auth, async (user) => {
+            const allowed = isAdminUser(user);
+            setAdminUi(allowed, user?.email || "");
+            if (allowed) await loadVideos();
         });
 
         if (videoForm) {
             videoForm.addEventListener("submit", async (e) => {
                 e.preventDefault();
-
                 const user = auth.currentUser;
-                if (!user || !adminEmails.includes(user.email)) {
+                if (!isAdminUser(user)) {
                     if (videoStatus) videoStatus.textContent = "No autorizado. Inicia sesión con tu cuenta admin.";
                     return;
                 }
-
                 const youtubeId = extractYoutubeId(videoUrl?.value);
                 if (!youtubeId) {
                     if (videoStatus) videoStatus.textContent = "Link/ID inválido. Ej: https://youtu.be/abc123xyz90";
                     return;
                 }
-
-                const snapshot = await getDocs(collection(db, "videos"));
-                const ids = snapshot.docs.map((d) => d.id);
-                const numbers = ids
-                    .map((id) => {
-                        const m = /^video-(\d+)$/i.exec(id);
-                        return m ? Number(m[1]) : null;
-                    })
-                    .filter((n) => Number.isFinite(n));
-
+                const numbers = currentVideos.map((item) => videoNumber(item.id)).filter(Number.isFinite);
                 let targetNumber = Number.parseInt(videoPos?.value, 10);
                 if (!Number.isFinite(targetNumber) || targetNumber <= 0) {
                     targetNumber = numbers.length ? Math.max(...numbers) + 1 : 1;
                 }
-
-                await setDoc(doc(db, "videos", `video-${targetNumber}`), {
-                    youtubeId,
-                });
-
+                await saveVideoAt(targetNumber, youtubeId);
                 if (videoStatus) videoStatus.textContent = `Video guardado en video-${targetNumber}`;
                 videoForm.reset();
                 await loadVideos();
+            });
+        }
+
+        if (videoManagerList) {
+            videoManagerList.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const user = auth.currentUser;
+                if (!isAdminUser(user)) return;
+                const row = e.target.closest(".admin-video-row");
+                if (!row) return;
+                const oldId = row.dataset.id;
+                const youtubeInput = row.elements.youtube;
+                const positionInput = row.elements.position;
+                const youtubeId = extractYoutubeId(youtubeInput?.value);
+                const position = Number.parseInt(positionInput?.value, 10);
+                if (!youtubeId || !Number.isFinite(position) || position <= 0) return;
+                const newId = `video-${position}`;
+                const target = currentVideos.find((item) => item.id === newId);
+                if (newId === oldId) {
+                    await setDoc(doc(db, "videos", oldId), { youtubeId });
+                } else if (target) {
+                    await Promise.all([
+                        setDoc(doc(db, "videos", newId), { youtubeId }),
+                        setDoc(doc(db, "videos", oldId), { youtubeId: target.youtubeId }),
+                    ]);
+                } else {
+                    await setDoc(doc(db, "videos", newId), { youtubeId });
+                    await deleteDoc(doc(db, "videos", oldId));
+                }
+                await loadVideos();
+            });
+
+            videoManagerList.addEventListener("click", async (e) => {
+                const button = e.target.closest("button[data-action]");
+                if (!button || !isAdminUser(auth.currentUser)) return;
+                const row = button.closest(".admin-video-row");
+                const index = currentVideos.findIndex((item) => item.id === row?.dataset.id);
+                if (index < 0) return;
+                const action = button.dataset.action;
+                if (action === "delete") {
+                    const ok = window.confirm(`Eliminar ${currentVideos[index].id}?`);
+                    if (!ok) return;
+                    await deleteDoc(doc(db, "videos", currentVideos[index].id));
+                    await loadVideos();
+                }
+                if (action === "up") await moveVideo(index, -1);
+                if (action === "down") await moveVideo(index, 1);
             });
         }
     }
@@ -415,7 +514,6 @@
             window.addEventListener("load", () => setTimeout(startFirebaseVideos, 2000), { once: true });
             return;
         }
-
         if ("IntersectionObserver" in window) {
             const io = new IntersectionObserver(
                 (entries) => {

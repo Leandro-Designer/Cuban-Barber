@@ -1,67 +1,75 @@
-﻿{
-    "hosting":  {
-                    "public":  ".",
-                    "ignore":  [
-                                   "firebase.json",
-                                   ".firebaserc",
-                                   ".gitignore",
-                                   "**/node_modules/**",
-                                   ".git",
-                                   ".git/**",
-                                   ".firebase",
-                                   ".firebase/**",
-                                   ".vscode",
-                                   ".vscode/**",
-                                   "firebase-debug.log"
-                               ],
-                    "cleanUrls":  true,
-                    "rewrites":  [
-                                     {
-                                         "destination":  "/admin/index.html",
-                                         "source":  "/admin"
-                                     },
-                                     {
-                                         "destination":  "/admin/index.html",
-                                         "source":  "/admin/**"
-                                     }
-                                 ],
-                    "headers":  [
-                                    {
-                                        "headers":  [
-                                                        {
-                                                            "key":  "Cache-Control",
-                                                            "value":  "no-store, no-cache, must-revalidate, max-age=0"
-                                                        }
-                                                    ],
-                                        "source":  "/"
-                                    },
-                                    {
-                                        "headers":  [
-                                                        {
-                                                            "key":  "Cache-Control",
-                                                            "value":  "no-store, no-cache, must-revalidate, max-age=0"
-                                                        }
-                                                    ],
-                                        "source":  "/index.html"
-                                    },
-                                    {
-                                        "headers":  [
-                                                        {
-                                                            "key":  "Cache-Control",
-                                                            "value":  "no-store, no-cache, must-revalidate, max-age=0"
-                                                        }
-                                                    ],
-                                        "source":  "/admin"
-                                    },
-                                    {
-                                        "headers":  [
-                                                        {
-                                                            "key":  "Cache-Control",
-                                                            "value":  "no-store, no-cache, must-revalidate, max-age=0"
-                                                        }
-                                                    ],
-                                        "source":  "/admin/**"
-                                    }
-                                ]
-                }
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      ".gitignore",
+      "**/node_modules/**",
+      ".git",
+      ".git/**",
+      ".firebase",
+      ".firebase/**",
+      ".vscode",
+      ".vscode/**",
+      "firebase-debug.log"
+    ],
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "destination": "/admin/index.html",
+        "source": "/admin"
+      },
+      {
+        "destination": "/admin/index.html",
+        "source": "/admin/**"
+      }
+    ],
+    "headers": [
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store, no-cache, must-revalidate, max-age=0"
+          }
+        ],
+        "source": "/"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store, no-cache, must-revalidate, max-age=0"
+          }
+        ],
+        "source": "/index.html"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store, no-cache, must-revalidate, max-age=0"
+          },
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          }
+        ],
+        "source": "/admin"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store, no-cache, must-revalidate, max-age=0"
+          },
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          }
+        ],
+        "source": "/admin/**"
+      }
+    ]
+  }
 }

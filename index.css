@@ -1207,7 +1207,7 @@ footer .social-box img.booksy {
 }
 
 .admin-page #Videos .admin-video-form {
-    display: none;
+    display: grid;
 }
 
 .admin-page #Videos .admin-video-form input {
@@ -1223,5 +1223,118 @@ footer .social-box img.booksy {
 
     .admin-page #Videos .admin-preview .gallery.admin-video-grid {
         grid-template-columns: 1fr;
+    }
+}
+/* ADMIN CRUD */
+.admin-login-card {
+    max-width: 520px;
+}
+
+.admin-dashboard[hidden] {
+    display: none !important;
+}
+
+.admin-dashboard {
+    display: grid;
+    grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
+    gap: 22px;
+    grid-column: 1 / -1;
+    align-items: start;
+}
+
+.admin-dashboard .admin-manager,
+.admin-dashboard .admin-preview {
+    grid-column: 2;
+}
+
+.admin-video-list {
+    display: grid;
+    gap: 12px;
+    padding: 18px;
+}
+
+.admin-empty {
+    margin: 0;
+    color: var(--muted);
+}
+
+.admin-video-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.8fr) minmax(180px, 1.4fr) minmax(90px, 0.45fr);
+    gap: 12px;
+    align-items: end;
+    padding: 14px;
+    background: #090909;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+}
+
+.admin-video-meta strong,
+.admin-video-meta span,
+.admin-video-row label {
+    display: block;
+}
+
+.admin-video-meta strong {
+    color: #fff;
+    font-size: 14px;
+}
+
+.admin-video-meta span,
+.admin-video-row label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.admin-video-row input {
+    width: 100%;
+    min-height: 40px;
+    margin-top: 7px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #050505;
+    color: #fff;
+    padding: 0 10px;
+}
+
+.admin-row-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.admin-row-actions .btn {
+    min-height: 38px;
+    padding: 9px 12px;
+    font-size: 13px;
+}
+
+.btn-danger {
+    background: #6f1d1d;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    box-shadow: 0 8px 20px rgba(180,40,40,0.28);
+}
+
+button:disabled,
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    box-shadow: none;
+}
+
+@media (max-width: 900px) {
+    .admin-dashboard,
+    .admin-video-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-dashboard .admin-manager,
+    .admin-dashboard .admin-preview {
+        grid-column: auto;
     }
 }
